@@ -18,13 +18,11 @@ target_include_directories(babel_client PRIVATE includes/client)
 
 target_link_libraries(babel_client ${CONAN_LIBS})
 
-
 #############################################
 
 SET(SERVER_SRCS sources/server/main.cpp)
 
 add_executable(babel_server ${SERVER_SRCS})
-
 
 target_include_directories(babel_server PRIVATE includes/server)
 
