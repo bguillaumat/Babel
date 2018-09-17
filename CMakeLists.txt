@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.10)
 project(CPP_babel_2018
         VERSION 0.0.0
         DESCRIPTION "It's a babel :p")
@@ -10,13 +10,9 @@ conan_basic_setup()
 
 ############################################
 
-add_executable(babel_client)
+SET(CLIENT_SRCS sources/client/main.cpp)
 
-target_sources(babel_client PRIVATE
-        sources/client/main.cpp)
-
-target_sources(babel_client PRIVATE
-        includes/client/client.hpp)
+add_executable(babel_client ${CLIENT_SRCS})
 
 target_include_directories(babel_client PRIVATE includes/client)
 
@@ -25,13 +21,10 @@ target_link_libraries(babel_client ${CONAN_LIBS})
 
 #############################################
 
-add_executable(babel_server)
+SET(SERVER_SRCS sources/server/main.cpp)
 
-target_sources(babel_server PRIVATE
-        sources/server/main.cpp)
+add_executable(babel_server ${SERVER_SRCS})
 
-target_sources(babel_server PRIVATE
-        includes/server/server.hpp)
 
 target_include_directories(babel_server PRIVATE includes/server)
 
