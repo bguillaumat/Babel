@@ -5,7 +5,7 @@ project(CPP_babel_2018
 
 set(CMAKE_CXX_STANDARD 17)
 
-include(build/conanbuildinfo.cmake)
+include(conanbuildinfo.cmake)
 conan_basic_setup()
 
 ############################################

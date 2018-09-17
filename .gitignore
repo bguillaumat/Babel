@@ -1,6 +1,12 @@
+# idea
+
 .idea/
 cmake-build-debug/
-build/
+
+# conan build file
+conanbuildinfo.cmake
+conanbuildinfo.txt
+conaninfo.txt
 
 
 # Created by https://www.gitignore.io/api/c++
