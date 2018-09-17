@@ -10,7 +10,7 @@ conan_basic_setup()
 
 ############################################
 
-SET(CLIENT_SRCS sources/client/main.cpp)
+SET(CLIENT_SRCS sources/client/main.cpp sources/client/PortAudio.cpp)
 
 add_executable(babel_client ${CLIENT_SRCS})
 
