@@ -2,7 +2,6 @@
 
 # idea
 
-*.txt
 build/
 .idea/
 cmake-build-debug/
