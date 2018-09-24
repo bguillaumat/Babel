@@ -1,7 +1,7 @@
 *.deb
 
 # idea
-
+.vs/
 build/
 .idea/
 cmake-build-debug/
