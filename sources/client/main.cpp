@@ -14,7 +14,7 @@
 int	main(int ac, char *av[])
 {
 	try {
-		std::unique_ptr<Babel::IAudio> audio(new Babel::PortAudio());
+		std::unique_ptr<Babel::IAudio> audio(new Babel::PaInput());
 	} catch (std::runtime_error const &error) {
 		std::cerr << error.what() << std::endl;
 		return 84;
