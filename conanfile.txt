@@ -6,3 +6,6 @@
 
 [generators]
     cmake
+
+[options]
+    *:shared=True
