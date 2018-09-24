@@ -5,6 +5,7 @@
 build/
 .idea/
 cmake-build-debug/
+cmake-build-release-visual-studio/
 
 # conan build file
 conanbuildinfo.cmake

@@ -19,8 +19,6 @@ add_executable(babel_client ${CLIENT_SRCS})
 target_include_directories(babel_client PRIVATE includes/client)
 
 target_link_libraries(babel_client ${CONAN_LIBS} Qt5::Widgets)
-
-
 #############################################
 
 SET(SERVER_SRCS sources/server/main.cpp)
@@ -28,9 +26,6 @@ SET(SERVER_SRCS sources/server/main.cpp)
 add_executable(babel_server ${SERVER_SRCS})
 
 target_include_directories(babel_server PRIVATE includes/server)
-
-message("test")
-message(${CONAN_LIBS})
 
 target_link_libraries(babel_server ${CONAN_LIBS})
 #############################################

@@ -15,7 +15,6 @@
 
 int	main(int ac, char *av[])
 {
-	std::cout << "hdsqljdmlsqjofdjszpfjdhùpdkjosq" << std::endl;
 	QApplication app(ac, av);
 	QPushButton bouton("Salut les Zéros, la forme ?");
 	bouton.show();
