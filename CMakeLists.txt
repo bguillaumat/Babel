@@ -12,7 +12,7 @@ find_package(Qt5Widgets)
 
 ############################################
 
-SET(CLIENT_SRCS sources/client/main.cpp sources/client/PortAudio.cpp)
+SET(CLIENT_SRCS sources/client/main.cpp sources/client/PortAudio.cpp sources/client/PaOutput.cpp)
 
 add_executable(babel_client ${CLIENT_SRCS})
 

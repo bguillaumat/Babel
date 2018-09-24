@@ -1,0 +1,7 @@
+format 220
+
+classcanvas 128002 class_ref 148610 // CallManager
+  classdiagramsettings member_max_width 0 end
+  xyz 374 138 2000
+end
+end

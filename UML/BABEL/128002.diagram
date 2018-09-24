@@ -1,0 +1,25 @@
+format 220
+
+classcanvas 128002 class_ref 128002 // IAudio
+  classdiagramsettings member_max_width 0 end
+  xyz 236.5 41 2000
+end
+classcanvas 128130 class_ref 128130 // PaInput
+  classdiagramsettings member_max_width 0 drawing_language c++ end
+  xyz 38.5 220.5 2000
+end
+classcanvas 128386 class_ref 128258 // PaOutput
+  classdiagramsettings member_max_width 0 end
+  xyz 307 220.5 2000
+end
+relationcanvas 128642 relation_ref 128002 // <realization>
+  from ref 128130 z 2001 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128770 relation_ref 128130 // <realization>
+  from ref 128386 z 2001 to ref 128002
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

@@ -1,0 +1,12 @@
+window_sizes 1920 1026 450 1464 853 120
+cleanlooks_style
+diagrams
+  active  classdiagram_ref 141186 // CallManager
+    1171 682 100 A4 0 0
+end
+show_stereotypes
+selected classdiagram_ref 141186 // CallManager
+open
+  classview_ref 141442 // CallManager
+end
+end

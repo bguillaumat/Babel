@@ -1,0 +1,1267 @@
+format 220
+"client" // client
+  revision 5
+  modified_by 2 "asianpw"
+  // class settings
+  
+  classdiagramsettings hide_attributes no hide_getset_operations no show_members_full_definition yes show_members_stereotype yes show_members_initialization yes show_attribute_modifiers yes member_max_width 30 show_parameter_name no class_drawing_mode class drawing_language c++ end
+  
+  classcompositediagramsettings end
+  
+  usecasediagramsettings end
+  
+  sequencediagramsettings end
+  
+  collaborationdiagramsettings end
+  
+  objectdiagramsettings end
+  
+  objectcompositediagramsettings end
+  
+  componentdiagramsettings
+   end
+  
+  deploymentdiagramsettings
+   end
+  
+  statediagramsettings
+   end
+  
+  activitydiagramsettings
+   end
+  
+  cpp_h_dir "/home/asianpw/Documents/TEK3/UML/BABEL/cpp/includes"
+  cpp_src_dir "/home/asianpw/Documents/TEK3/UML/BABEL/cpp/sources"
+  cpp_namespace "Babel"
+  deploymentview 128002 "generate"
+    //deployment diagram settings
+    deploymentdiagramsettings
+     end
+    artifact 128386 "IAudio"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${namespace}
+${require_once}
+${use}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_elems
+	class_ref 128002 // IAudio
+      end
+    end
+
+    artifact 128514 "PaInput"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${namespace}
+${require_once}
+${use}
+${definition}
+?>
+"
+      python_src "${comment}
+${import}
+${definition}"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_elems
+	class_ref 128130 // PaInput
+      end
+    end
+
+    artifact 128642 "PaOutput"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 128258 // PaOutput
+      end
+    end
+
+    artifact 135170 "ICompressor"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${namespace}
+${require_once}
+${use}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_elems
+	class_ref 134786 // ICompressor
+      end
+    end
+
+    artifact 135298 "Opus"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_elems
+	class_ref 134914 // Opus
+      end
+    end
+
+    artifact 135426 "EncodedSound"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_elems
+	class_ref 135042 // EncodedSound
+      end
+    end
+
+    artifact 135554 "DecodedSound"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_elems
+	class_ref 135170 // DecodedSound
+      end
+    end
+
+    artifact 142082 "INetwork"
+      stereotype "source"
+      cpp_h "#ifndef ${NAMESPACE}_${NAME}_H
+#define ${NAMESPACE}_${NAME}_H
+
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+#endif
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      java_src "${comment}
+${package}
+${imports}
+${definition}"
+      php_src "<?php
+${comment}
+${namespace}
+${require_once}
+${use}
+${definition}
+?>
+"
+      idl_src "#ifndef ${MODULE}_${NAME}_H
+#define ${MODULE}_${NAME}_H
+
+${comment}
+${includes}
+${module_start}
+${definition}
+${module_end}
+#endif
+"
+      associated_elems
+	class_ref 135298 // INetwork
+      end
+    end
+  end
+
+  classview 128002 "IAudio"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    associated_deployment_view deploymentview_ref 128002 // generate
+    classdiagram 128002 "IAudio"
+      classdiagramsettings draw_all_relations no member_max_width 0 end
+      size A4
+    end
+
+    class 128002 "IAudio"
+      abstract visibility public stereotype "interface"
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name}${extends} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      associated_diagram classdiagram_ref 128002 // IAudio
+      operation 135170 "~IAudio"
+	cpp_virtual cpp_defaulted public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 142338 "start"
+	abstract cpp_virtual public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 142466 "stop"
+	abstract cpp_virtual public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 128130 "PaInput"
+      abstract visibility public 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl "${comment}${@}${visibility}${static}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl "${comment}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl "${comment}${abstract}${custom}valuetype ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "This class take sound from the first micro on the device"
+      attribute 128002 "_stream"
+	private explicit_type "PaStream *"
+	init_value "nullptr"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "Contain current input stream"
+      end
+
+      operation 134658 "PaInput"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${volatile}${throw} {
+	error = Pa_Initialize();
+	if (error != paNoError) {
+		thrown std::runtime_error(\"Unable to initialize PortAudio\")
+	}
+}
+"
+	
+	
+	
+	
+      end
+
+      operation 134786 "~PaInput"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128002 "RecordCallback"
+	public explicit_return_type "int"
+	nparams 6
+	  param in name "inputBuffer" explicit_type "void"
+	  param in name "outputBuffer" explicit_type "void"
+	  param in name "framesPerBuffer" explicit_type "ulong"
+	  param in name "timeInfo" explicit_type "PaStreamCallbackTimeInfo"
+	  param in name "statusFlags" explicit_type "PaStreamCallbackFlags"
+	  param in name "userData" explicit_type "void"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} * ${p1}${v1}, ${t2} ${p2}${v2}, const ${t3} ${p3}${v3}, const ${t4} ${p4}${v4}, ${t5} * ${p5}${v5}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} * ${p0}, ${t1} * ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} * ${p5}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Callback record "
+      end
+
+      operation 142850 "start"
+	cpp_virtual cpp_override public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 142594 "stop"
+	cpp_virtual cpp_override public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 128002 // <realization>
+	relation 128002 -_-|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 128002 // <realization>
+	  b parent class_ref 128002 // IAudio
+      end
+
+      attribute 135426 "error"
+	private explicit_type "PaError"
+	cpp_decl "	${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135682 "_paParams"
+	private explicit_type "PaStreamParameters"
+	cpp_decl "	${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 128258 "PaOutput"
+      abstract visibility public 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "This class play sound on the device"
+      attribute 128130 "_stream"
+	private explicit_type "PaStream *"
+	init_value "nullptr"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      operation 134914 "PaOutput"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${volatile}${throw} {
+	error = Pa_Initialize();
+	if (error != paNoError) {
+		thrown std::runtime_error(\"Unable to initialize PortAudio\")
+	}
+}
+"
+	
+	
+	
+	
+      end
+
+      operation 135042 "~PaOutput"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128130 "PlayCallback"
+	public explicit_return_type "int"
+	nparams 6
+	  param in name "inputBuffer" explicit_type "void"
+	  param in name "outputBuffer" explicit_type "void"
+	  param in name "framesPerBuffer" explicit_type "ulong"
+	  param in name "timeInfo" explicit_type "PaStreamCallbackTimeInfo"
+	  param in name "statusFlags" explicit_type "PaStreamCallbackFlags"
+	  param in name "userData" explicit_type "void"
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${t0} * ${p0}${v0}, ${t1} * ${p1}${v1}, ${t2} ${p2}${v2}, const ${t3} ${p3}${v3}, const ${t4} ${p4}${v4}, ${t5} * ${p5}${v5}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${t0} * ${p0}, ${t1} * ${p1}, ${t2} ${p2}, ${t3} ${p3}, ${t4} ${p4}, ${t5} * ${p5}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+	comment "Callback record "
+      end
+
+      operation 142978 "start"
+	cpp_virtual cpp_override public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 142722 "stop"
+	cpp_virtual cpp_override public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 128130 // <realization>
+	relation 128130 -_-|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 128130 // <realization>
+	  b parent class_ref 128002 // IAudio
+      end
+
+      attribute 135554 "error"
+	private explicit_type "PaError"
+	cpp_decl "	${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135810 "_paParams"
+	private explicit_type "PaStreamParameters"
+	cpp_decl "	${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+  end
+
+  classview 134530 "ICompressor"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    associated_deployment_view deploymentview_ref 128002 // generate
+    classdiagram 134530 "ICompressor"
+      classdiagramsettings member_max_width 0 end
+      size A4
+    end
+
+    class 134786 "ICompressor"
+      abstract visibility public stereotype "interface"
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name}${extends} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 141698 "~ICompressor"
+	cpp_virtual cpp_defaulted public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 134914 "Opus"
+      visibility public 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 134658 // <realization>
+	relation 134658 -_-|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 134658 // <realization>
+	  b parent class_ref 134786 // ICompressor
+      end
+
+      operation 141826 "Opus"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${volatile}${throw} {
+	int	error;
+
+	_encoder = opus_encoder_create(SoundDevice::sampleRate, SoundDevice::channels, OPUS_APPLICATION_VOIP, &error);
+	if (error != OPUS_OK) {
+		thrown std::runtime_error(\"Unable to create an encoder\");
+	}
+	_decoder = opus_decoder_create(Sound::sampleRate, Sound::channels, &error);
+	if (error != OPUS_OK) {
+		thrown std::runtime_error(\"Unable to create a decoder\");
+	}
+}
+"
+	
+	
+	
+	
+      end
+
+      operation 141954 "~Opus"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${volatile}${throw} {
+	opus_encoder_destroy(_encoder);
+	opus_decoder_destroy(_decoder);
+}
+"
+	
+	
+	
+	
+      end
+
+      attribute 134658 "_encoder"
+	private explicit_type "OpusEncoder *"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "This is use for encode sound to opus codec"
+      end
+
+      attribute 134786 "_decoder"
+	private explicit_type "OpusDecoder *"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+	comment "This is use for decode a sound with opus codec"
+      end
+
+      operation 142082 "encodeSound"
+	public return_type class_ref 135042 // EncodedSound
+	nparams 1
+	  param in name "decodedSound" type class_ref 135170 // DecodedSound
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+	soundEncoded	encodeSound;
+
+	encodeSound.buffer.resize(decodedSound.size);
+  	encodeSound.size = opus_encode_float(_encoder, decodedSound.buffer.data(), SoundDevice::frame_size, encodeSound.buffer.data(), decodedSound.size);
+  	return encodeSound;
+}
+"
+	
+	
+	
+	
+      end
+
+      operation 142210 "decodeSound"
+	public return_type class_ref 135170 // DecodedSound
+	nparams 1
+	  param in name "soundEncode" type class_ref 135042 // EncodedSound
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}const ${t0} & ${p0}${v0}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}const ${t0} & ${p0}${)}${const}${volatile}${throw}${staticnl}{
+	soundDecoded	decodeSound;
+
+	decodeSound.buffer.resize(soundEncode.size);
+	decodeSound.size = opus_decode_float(_decode, soundEncode.buffer.data(), soundEncode.size(), decodeSound.buffer.data(), soundDecoded::frame_size, 0) * SoundDevice::channels;
+	return decodeSound;
+}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 135042 "EncodedSound"
+      visibility public stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl "${comment}struct ${name} {
+${members}};
+"
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "This struct contain a \"Encoded sound\""
+      attribute 134914 "_buffer"
+	public explicit_type "uchar"
+	multiplicity "*"
+	stereotype "vector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135042 "_size"
+	public explicit_type "ulong"
+	init_value "0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+
+    class 135170 "DecodedSound"
+      visibility public stereotype "struct"
+      cpp_decl "${comment}${template}struct ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl "${comment}struct ${name} {
+${members}};
+"
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "This structure contain a \"Decoded sound\""
+      attribute 135170 "_buffer"
+	public explicit_type "float"
+	multiplicity "*"
+	stereotype "vector"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135298 "_size"
+	public explicit_type "ulong"
+	init_value "0"
+	cpp_decl "    ${comment}${static}${thread_local}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+    end
+  end
+
+  classview 134786 "INetwork"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    associated_deployment_view deploymentview_ref 128002 // generate
+    classdiagram 134658 "INetwork"
+      classdiagramsettings member_max_width 0 end
+      size A4
+    end
+
+    class 135298 "INetwork"
+      abstract visibility public stereotype "interface"
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl "${comment}${@}${visibility}${static}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name}${extends} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      comment "This is an interface for Network Plugin"
+      operation 143106 "~INetwork"
+	cpp_virtual cpp_defaulted public explicit_return_type ""
+	nparams 0
+	cpp_decl "	${comment}${inline}${virtual}	${name}${(}${)}${volatile}${throw};"
+	cpp_def "${comment}${inline}	${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}"
+	
+	
+	
+	
+      end
+
+      operation 143234 "initConnection"
+	abstract cpp_virtual public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "${comment}${friend}${static}${inline}${virtual}${type}	${name}${(}${)}${const}${volatile}${throw}${abstract};"
+	
+	
+	
+	
+      end
+
+      operation 143362 "sendData"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "${comment}${friend}${static}${inline}${virtual}${type}	${name}${(}${)}${const}${volatile}${throw}${abstract};"
+	
+	
+	
+	
+      end
+    end
+
+    class 141954 "TCP"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 141186 // <realization>
+	relation 141186 -_-|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 141186 // <realization>
+	  b parent class_ref 135298 // INetwork
+      end
+
+      operation 150402 "TCP"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "${comment}${inline}	${name}${(}${)}${volatile}${throw};"
+	cpp_def "${comment}${inline}	${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}"
+	
+	
+	
+	
+      end
+
+      operation 150530 "~TCP"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "${comment}${inline}${virtual}	${name}${(}${)}${volatile}${throw};"
+	cpp_def "${comment}${inline}	${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}"
+	
+	
+	
+	
+      end
+
+      operation 149890 "initConnection"
+	cpp_virtual public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "${comment}${friend}${static}${inline}${virtual}${type}	${name}${(}${)}${const}${volatile}${throw}${abstract};"
+	cpp_def "${comment}${inline}${type}	${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}"
+	
+	
+	
+	
+      end
+
+      operation 150018 "sendData"
+	cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "${comment}${friend}${static}${inline}${virtual}${type}	${name}${(}${)}${const}${volatile}${throw}${abstract};"
+	cpp_def "${comment}${inline}${type}	${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}"
+	
+	
+	
+	
+      end
+    end
+
+    class 142082 "UDP"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 141314 // <realization>
+	relation 141314 -_-|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 141314 // <realization>
+	  b parent class_ref 135298 // INetwork
+      end
+
+      operation 150658 "UDP"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "${comment}${inline}	${name}${(}${)}${volatile}${throw};"
+	cpp_def "${comment}${inline}	${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}"
+	
+	
+	
+	
+      end
+
+      operation 150786 "~UDP"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "${comment}${inline}${virtual}	${name}${(}${)}${volatile}${throw};"
+	cpp_def "${comment}${inline}	${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}"
+	
+	
+	
+	
+      end
+
+      operation 150146 "initConnection"
+	cpp_virtual public explicit_return_type "bool"
+	nparams 0
+	cpp_decl "${comment}${friend}${static}${inline}${virtual}${type}	${name}${(}${)}${const}${volatile}${throw}${abstract};"
+	cpp_def "${comment}${inline}${type}	${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}"
+	
+	
+	
+	
+      end
+
+      operation 150274 "sendData"
+	cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "${comment}${friend}${static}${inline}${virtual}${type}	${name}${(}${)}${const}${volatile}${throw}${abstract};"
+	cpp_def "${comment}${inline}${type}	${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl}{
+  ${body}}"
+	
+	
+	
+	
+      end
+    end
+  end
+
+  classview 141442 "CallManager"
+    
+    classdiagramsettings member_max_width 0 end
+    
+    classcompositediagramsettings end
+    
+    collaborationdiagramsettings end
+    
+    objectdiagramsettings end
+    
+    objectcompositediagramsettings end
+    
+    sequencediagramsettings end
+    
+    statediagramsettings
+     end
+    
+    
+    activitydiagramsettings
+     end
+    classdiagram 141186 "CallManager"
+      classdiagramsettings member_max_width 0 end
+      size A4
+    end
+
+    class 148610 "CallManager"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      operation 157314 "CallManager"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "${comment}${inline}	${name}${(}${)}${volatile}${throw};"
+	cpp_def "${comment}${inline}	${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}"
+	
+	
+	
+	
+      end
+
+      operation 157442 "~CallManager"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "${comment}${inline}${virtual}	${name}${(}${)}${volatile}${throw};"
+	cpp_def "${comment}${inline}	${class}::${name}${(}${)}${volatile}${throw} {
+  ${body}}"
+	
+	
+	
+	
+      end
+    end
+  end
+end
