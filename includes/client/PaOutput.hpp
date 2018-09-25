@@ -1,25 +1,26 @@
-/*
-** EPITECH PROJECT, 2021
-** CPP_babel_2018
-** File description:
-** Created by asianpw,
-*/
+#ifndef BABEL_PAOUTPUT_H
+#define BABEL_PAOUTPUT_H
 
-#ifndef CPP_BABEL_2018_PAOUTPUT_HPP
-#define CPP_BABEL_2018_PAOUTPUT_HPP
-
-#include <portaudio.h>
+#include <PortAudio.h>
 #include "IAudio.hpp"
 
 namespace Babel {
-	class PaOutput : public IAudio {
+
+//This class play sound on the device
+class PaOutput : public IAudio {
 	public:
 		PaOutput();
-		~PaOutput() final;
-		static int	callback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void *userData);
+		~PaOutput();
+		//Callback record 
+		int PlayCallback(void * inputBuffer, void * outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo timeInfo, const PaStreamCallbackFlags statusFlags, void * userData);
+		virtual bool start() override;
+		virtual bool stop() override;
 
 	private:
-		PaStream	*_stream;
-	};
-}
-#endif //CPP_BABEL_2018_PAOUTPUT_HPP
+		PaStream	*_stream = nullptr;
+		PaError		error;
+		PaStreamParameters	_paParams;
+};
+
+} // namespace Babel
+#endif

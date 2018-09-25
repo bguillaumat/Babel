@@ -1,0 +1,8 @@
+window_sizes 1800 945 450 1343 704 168
+
+show_stereotypes
+selected attribute_ref 134914 // _buffer
+open
+  class_ref 135042 // EncodedSound
+end
+end

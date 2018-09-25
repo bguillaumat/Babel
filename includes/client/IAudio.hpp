@@ -1,17 +1,14 @@
-/*
-** EPITECH PROJECT, 2021
-** CPP_babel_2018
-** File description:
-** Created by asianpw,
-*/
-
-#ifndef CPP_BABEL_2018_IAUDIO_HPP
-#define CPP_BABEL_2018_IAUDIO_HPP
+#ifndef BABEL_IAUDIO_H
+#define BABEL_IAUDIO_H
 
 namespace Babel {
-	class IAudio {
+
+class IAudio {
 	public:
 		virtual ~IAudio() = default;
-	};
-}
-#endif //CPP_BABEL_2018_IAUDIO_HPP
+		virtual bool start() = 0;
+		virtual bool stop() = 0;
+};
+
+} // namespace Babel
+#endif

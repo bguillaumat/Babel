@@ -1,5 +1,7 @@
 *.deb
 
+CMakeSettings.json
+
 # idea
 .vs/
 build/

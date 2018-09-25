@@ -1,7 +1,7 @@
 format 220
 "client" // client
-  revision 5
-  modified_by 2 "asianpw"
+  revision 6
+  modified_by 23 "$KOR000-4HNUIEH6Q2I1"
   // class settings
   
   classdiagramsettings hide_attributes no hide_getset_operations no show_members_full_definition yes show_members_stereotype yes show_members_initialization yes show_attribute_modifiers yes member_max_width 30 show_parameter_name no class_drawing_mode class drawing_language c++ end
@@ -30,8 +30,8 @@ format 220
   activitydiagramsettings
    end
   
-  cpp_h_dir "/home/asianpw/Documents/TEK3/UML/BABEL/cpp/includes"
-  cpp_src_dir "/home/asianpw/Documents/TEK3/UML/BABEL/cpp/sources"
+  cpp_h_dir "C:\\Users\\$KOR000-4HNUIEH6Q2I1\\Documents\\CPP_babel_2018\\includes"
+  cpp_src_dir "C:\\Users\\$KOR000-4HNUIEH6Q2I1\\Documents\\CPP_babel_2018\\sources"
   cpp_namespace "Babel"
   deploymentview 128002 "generate"
     //deployment diagram settings
