@@ -1,4 +1,4 @@
-
+#include <stdexcept>
 #include "Opus.hpp"
 #include "EncodedSound.hpp"
 #include "DecodedSound.hpp"

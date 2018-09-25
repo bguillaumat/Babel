@@ -1,7 +1,7 @@
 #ifndef BABEL_PAINPUT_H
 #define BABEL_PAINPUT_H
 
-#include <PortAudio.h>
+#include <portaudio.h>
 #include "IAudio.hpp"
 
 namespace Babel {
@@ -11,7 +11,7 @@ namespace Babel {
 		public:
 			PaInput();
 			~PaInput();
-			//Callback record 
+			//Callback record
 			int RecordCallback(void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo timeInfo, const PaStreamCallbackFlags statusFlags, void *userData);
 			virtual bool start() override;
 			virtual bool stop() override;

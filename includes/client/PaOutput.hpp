@@ -1,7 +1,7 @@
 #ifndef BABEL_PAOUTPUT_H
 #define BABEL_PAOUTPUT_H
 
-#include <PortAudio.h>
+#include <portaudio.h>
 #include "IAudio.hpp"
 
 namespace Babel {
@@ -10,11 +10,11 @@ namespace Babel {
 class PaOutput : public IAudio {
 	public:
 		PaOutput();
-		~PaOutput();
-		//Callback record 
-		int PlayCallback(void * inputBuffer, void * outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo timeInfo, const PaStreamCallbackFlags statusFlags, void * userData);
-		virtual bool start() override;
-		virtual bool stop() override;
+		~PaOutput() override;
+		//Callback record
+		int	PlayCallback(void * inputBuffer, void * outputBuffer, unsigned long framesPerBuffer, PaStreamCallbackTimeInfo timeInfo, PaStreamCallbackFlags statusFlags, void * userData);
+		virtual bool	start() override;
+		virtual bool	stop() override;
 
 	private:
 		PaStream	*_stream = nullptr;

@@ -14,7 +14,7 @@
 int	main(int ac, char *av[])
 {
 	QApplication	app(ac, av);
-	QPushButton		bouton("Salut les Zéros, la forme ?");
+	QPushButton		bouton("Salut les ZÃ©ros, la forme ?");
 
 	bouton.show();
 	return app.exec();

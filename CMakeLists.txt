@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 17)
 include(conanbuildinfo.cmake)
 conan_basic_setup()
 
-find_package(Qt5Widgets)
+find_package(Qt5Widgets CONFIG REQUIRED)
 
 ############################################
 
