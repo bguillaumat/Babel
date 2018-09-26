@@ -14,3 +14,7 @@ conan remote add bincrafters "https://api.bintray.com/conan/bincrafters/public-c
 
 # install all dependencies with conan
 conan install . --build portaudio --build Qt
+
+# Linux xcb error
+# export QT_QPA_PLATFORM_PLUGIN_PATH=<PATH TO CONAN QT>
+# export QT_QPA_FONTDIR=<PATH TO FONTS DIRECTORY>
