@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <iostream>
 #include "Opus.hpp"
 #include "EncodedSound.hpp"
 #include "DecodedSound.hpp"
@@ -6,7 +7,7 @@
 namespace Babel {
 
 Opus::Opus() {
-	int	error;
+	int	error = OPUS_OK;
 
 	_encoder = opus_encoder_create(SoundDeviceSetting::sampleRate, SoundDeviceSetting::channels, OPUS_APPLICATION_VOIP, &error);
 	if (error != OPUS_OK) {

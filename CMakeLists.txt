@@ -10,6 +10,12 @@ conan_basic_setup()
 
 find_package(Qt5Widgets CONFIG REQUIRED)
 
+include_directories(includes/common)
+SET(COMMON_SRCS
+		sources/common/Factory.cpp
+		sources/common/IObservable.cpp
+		)
+
 ############################################
 
 SET(CLIENT_SRCS
@@ -18,7 +24,7 @@ SET(CLIENT_SRCS
 	sources/client/PaInput.cpp
 	sources/client/PaOutput.cpp)
 
-add_executable(babel_client ${CLIENT_SRCS} includes/client/IAudio.hpp)
+add_executable(babel_client ${CLIENT_SRCS} ${COMMON_SRCS} includes/client/IAudio.hpp)
 
 target_include_directories(babel_client PRIVATE includes/client)
 
@@ -31,5 +37,5 @@ add_executable(babel_server ${SERVER_SRCS})
 
 target_include_directories(babel_server PRIVATE includes/server)
 
-target_link_libraries(babel_server ${CONAN_LIBS})
+target_link_libraries(babel_server ${CONAN_LIBS} ${COMMON_SRCS})
 #############################################

@@ -10,12 +10,24 @@
 #include <memory>
 #include <QApplication>
 #include <QPushButton>
+#include <ICompressor.hpp>
+#include <Opus.hpp>
+#include <PaOutput.hpp>
+#include <PaInput.hpp>
 
 int	main(int ac, char *av[])
 {
 	QApplication	app(ac, av);
-	QPushButton		bouton("Salut les Zéros, la forme ?");
+	QPushButton		button("Salut les Zéros, la forme ?");
+	Babel::ICompressor	*compressor = new Babel::Opus();
+	Babel::IAudio		*audio = new Babel::PaOutput();
+	Babel::IAudio		*audio1 = new Babel::PaInput();
 
-	bouton.show();
-	return app.exec();
+	audio->start();
+	audio1->start();
+	button.show();
+	app.exec();
+	audio->stop();
+	audio1->stop();
+	return 0;
 }

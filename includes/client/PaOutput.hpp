@@ -13,8 +13,8 @@ class PaOutput : public IAudio {
 		~PaOutput() override;
 		//Callback record
 		int	PlayCallback(void * inputBuffer, void * outputBuffer, unsigned long framesPerBuffer, PaStreamCallbackTimeInfo timeInfo, PaStreamCallbackFlags statusFlags, void * userData);
-		virtual bool	start() override;
-		virtual bool	stop() override;
+		bool	start() override;
+		bool	stop() override;
 
 	private:
 		PaStream	*_stream = nullptr;

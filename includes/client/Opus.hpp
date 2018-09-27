@@ -11,9 +11,9 @@ namespace Babel {
 	class Opus : public ICompressor {
 	public:
 		Opus();
-		~Opus();
-		EncodedSound	encodeSound(DecodedSound &decodedSound);
-		DecodedSound	decodeSound(EncodedSound &soundEncode);
+		~Opus() override;
+		EncodedSound	encodeSound(DecodedSound &decodedSound) override;
+		DecodedSound	decodeSound(EncodedSound &soundEncode) override;
 
 	private:
 		//This is use for encode sound to opus codec

@@ -13,8 +13,8 @@ namespace Babel {
 			~PaInput();
 			//Callback record
 			int RecordCallback(void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo timeInfo, const PaStreamCallbackFlags statusFlags, void *userData);
-			virtual bool start() override;
-			virtual bool stop() override;
+			bool start() override;
+			bool stop() override;
 
 
 		private:
