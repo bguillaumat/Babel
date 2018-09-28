@@ -5,7 +5,7 @@ project(CPP_babel_2018
 
 set(CMAKE_CXX_STANDARD 17)
 
-include(conanbuildinfo.cmake)
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 find_package(Qt5Widgets CONFIG REQUIRED)
@@ -13,8 +13,7 @@ find_package(Qt5Widgets CONFIG REQUIRED)
 include_directories(includes/common)
 SET(COMMON_SRCS
 		sources/common/Factory.cpp
-		sources/common/IObservable.cpp
-		)
+		sources/common/IObservable.cpp)
 
 ############################################
 
@@ -33,9 +32,9 @@ target_link_libraries(babel_client ${CONAN_LIBS} Qt5::Widgets)
 
 SET(SERVER_SRCS sources/server/main.cpp)
 
-add_executable(babel_server ${SERVER_SRCS})
+add_executable(babel_server ${SERVER_SRCS} ${COMMON_SRCS})
 
 target_include_directories(babel_server PRIVATE includes/server)
 
-target_link_libraries(babel_server ${CONAN_LIBS} ${COMMON_SRCS})
+target_link_libraries(babel_server ${CONAN_LIBS})
 #############################################
