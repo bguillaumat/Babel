@@ -18,3 +18,6 @@ conan install . --build portaudio --build Qt
 # Linux xcb error
 # export QT_QPA_PLATFORM_PLUGIN_PATH=<PATH TO CONAN QT>
 # export QT_QPA_FONTDIR=<PATH TO FONTS DIRECTORY>
+
+# Linux compile
+# mkdir build && cd build && conan install .. && cmake .. -G "Unix Makefiles" && cmake –-build .
