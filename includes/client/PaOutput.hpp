@@ -12,13 +12,14 @@ class PaOutput : public IAudio {
 		PaOutput();
 		~PaOutput() override;
 		//Callback record
-		int	PlayCallback(void * inputBuffer, void * outputBuffer, unsigned long framesPerBuffer, PaStreamCallbackTimeInfo timeInfo, PaStreamCallbackFlags statusFlags, void * userData);
+		static int	PlayCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags, void *userData);
 		bool	start() override;
 		bool	stop() override;
 
 	private:
-		PaStream	*_stream = nullptr;
-		PaError		error;
+		PaStream		*_stream = nullptr;
+		PaStreamParameters	_parameters;
+		PaError			_error;
 		PaStreamParameters	_paParams;
 };
 

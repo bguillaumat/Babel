@@ -11,11 +11,11 @@ Opus::Opus() {
 
 	_encoder = opus_encoder_create(SoundDeviceSetting::sampleRate, SoundDeviceSetting::channels, OPUS_APPLICATION_VOIP, &error);
 	if (error != OPUS_OK) {
-		throw std::runtime_error("Unable to create an encoder");
+		throw std::runtime_error(opus_strerror(error));
 	}
 	_decoder = opus_decoder_create(SoundDeviceSetting::sampleRate, SoundDeviceSetting::channels, &error);
 	if (error != OPUS_OK) {
-		throw std::runtime_error("Unable to create a decoder");
+		throw std::runtime_error(opus_strerror(error));
 	}
 }
 
