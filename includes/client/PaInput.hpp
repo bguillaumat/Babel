@@ -10,9 +10,9 @@ namespace Babel {
 	class PaInput : public IAudio {
 		public:
 			PaInput();
-			~PaInput();
+			~PaInput() override;
 			//Callback record
-			int RecordCallback(void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo timeInfo, const PaStreamCallbackFlags statusFlags, void *userData);
+			static int RecordCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags, void *userData);
 			bool start() override;
 			bool stop() override;
 
@@ -20,7 +20,8 @@ namespace Babel {
 		private:
 			//Contain current input stream
 			PaStream	*_stream = nullptr;
-			PaError		error;
+			PaStreamParameters	_parameters;
+			PaError		_error;
 			PaStreamParameters _paParams;
 	};
 } // namespace Babel
