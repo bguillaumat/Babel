@@ -7,11 +7,22 @@
 
 #include "../../includes/server/Server.hpp"
 
-void	client_connected()
-{}
+Client::Client(ip, username)
+{
+}
 
-void	client_disconnected()
-{}
+void Client::client_connected()
+{
+}
 
-void	print_ip_address()
-{}
+void Client::client_disconnected()
+{
+}
+
+const std::string Client::getIp()
+{
+}
+
+const std::string Client::getUsername()
+{
+}

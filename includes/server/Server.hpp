@@ -19,9 +19,19 @@
 #include <string>
 
 class Client {
+private:
+	const std::string	_ip;
+	const std::string	_username;
+
 public:
-	std::string	_ip;
-	std::string	_username;
+	~Client();
+	Client(ip, username);
+	const std::string	getIp();
+	const std::string	getUsername();
+	void	setIp();
+	void	setUsername();
+	void	client_connected();
+	void	client_disconnected();
 };
 
 #endif //CPP_BABEL_2018_SERVER_HPP
