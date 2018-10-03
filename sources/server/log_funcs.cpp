@@ -25,7 +25,7 @@ void Client::client_connected()
 void Client::client_disconnected()
 {
 	_state = false;
-	std::cout<<"The user "<<this->_username<<" is now deconnected"std::endl;
+	std::cout<<"The user "<<this->_username<<" is now deconnected"<<std::endl;
 }
 
 const std::string Client::getIp()
@@ -40,10 +40,8 @@ const std::string Client::getUsername()
 
 void Client::setIp(std::string ipaddress)
 {
-	_ip = ipaddress;
 }
 
 void Client::setUsername(std::string username)
 {
-	_username = username;
 }

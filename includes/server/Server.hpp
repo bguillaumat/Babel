@@ -17,6 +17,7 @@
 	#include <winsock2.h>
 #endif
 
+#include <iostream>
 #include <set>
 #include <string>
 #include <boost/asio.hpp>
@@ -31,7 +32,7 @@ private:
 
 public:
 	~Client();
-	Client(std::string, std::string);
+	Client(std::string, std::string, bool);
 	const std::string	getIp();
 	const std::string	getUsername();
 	void	setIp(std::string);

@@ -40,7 +40,11 @@ target_include_directories(babel_client PRIVATE includes/client)
 target_link_libraries(babel_client ${CONAN_LIBS} Qt5::Widgets)
 #############################################
 
-SET(SERVER_SRCS sources/server/main.cpp sources/server/server.cpp includes/server/Server.hpp sources/server/log_funcs.cpp)
+SET(SERVER_SRCS
+		sources/server/main.cpp
+		sources/server/server.cpp
+		sources/server/log_funcs.cpp
+		sources/server/server_commands.cpp)
 
 add_executable(babel_server ${SERVER_SRCS} ${COMMON_SRCS})
 
