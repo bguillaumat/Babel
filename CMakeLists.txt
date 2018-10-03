@@ -31,7 +31,7 @@ SET(CLIENT_SRCS
 	sources/client/main.cpp
 	sources/client/Opus.cpp
 	sources/client/PaInput.cpp
-	sources/client/PaOutput.cpp sources/server/server.cpp)
+	sources/client/PaOutput.cpp sources/server/server.cpp includes/server/server.hpp sources/server/server_commands.cpp)
 
 add_executable(babel_client ${CLIENT_SRCS} ${COMMON_SRCS} includes/client/IAudio.hpp)
 
@@ -40,7 +40,7 @@ target_include_directories(babel_client PRIVATE includes/client)
 target_link_libraries(babel_client ${CONAN_LIBS} Qt5::Widgets)
 #############################################
 
-SET(SERVER_SRCS sources/server/main.cpp sources/server/server.cpp)
+SET(SERVER_SRCS sources/server/main.cpp sources/server/server.cpp includes/server/server.hpp sources/server/log_funcs.cpp)
 
 add_executable(babel_server ${SERVER_SRCS} ${COMMON_SRCS})
 

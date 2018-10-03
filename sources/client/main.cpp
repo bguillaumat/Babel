@@ -24,7 +24,7 @@
 #include <PaOutput.hpp>
 #include <PaInput.hpp>
 
-/*
+
 typedef int SOCKET;
 
 void	socket_udp()
@@ -81,7 +81,6 @@ void	socket_udp()
 		std::cout << "Recu : " << buff << " de " << std::endl;
 	}
 }
-*/
 
 int	main(int ac, char *av[])
 {
@@ -91,7 +90,7 @@ int	main(int ac, char *av[])
 	Babel::IAudio		*audio1 = new Babel::PaOutput();
 	Babel::IAudio		*audio = new Babel::PaInput();
 
-//	socket_udp();
+	socket_udp();
 	audio->start();
 	audio1->start();
 	button.show();
