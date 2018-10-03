@@ -16,5 +16,12 @@
 	#include <winsock2.h>
 #endif
 
+#include <string>
+
+class Client {
+public:
+	std::string	_ip;
+	std::string	_username;
+};
 
 #endif //CPP_BABEL_2018_SERVER_HPP
