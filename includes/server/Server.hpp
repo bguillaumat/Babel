@@ -28,8 +28,8 @@ public:
 	Client(ip, username);
 	const std::string	getIp();
 	const std::string	getUsername();
-	void	setIp();
-	void	setUsername();
+	void	setIp(std::string);
+	void	setUsername(std::string);
 	void	client_connected();
 	void	client_disconnected();
 };
