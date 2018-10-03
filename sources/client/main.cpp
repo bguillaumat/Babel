@@ -5,6 +5,15 @@
 ** Created by asianpw,
 */
 
+#ifdef  __unix__
+	#include <sys/types.h>
+	#include <sys/socket.h>
+	#include <netinet/in.h>
+	#include <arpa/inet.h>
+#elif _WIN32 
+	#include <winsock2.h>
+#endif
+
 #include <portaudio.h>
 #include <iostream>
 #include <memory>
@@ -14,8 +23,8 @@
 #include <Opus.hpp>
 #include <PaOutput.hpp>
 #include <PaInput.hpp>
-#include <uv.h>
 
+/*
 typedef int SOCKET;
 
 void	socket_udp()
@@ -72,6 +81,7 @@ void	socket_udp()
 		std::cout << "Recu : " << buff << " de " << std::endl;
 	}
 }
+*/
 
 int	main(int ac, char *av[])
 {
