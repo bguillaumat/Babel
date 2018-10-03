@@ -7,7 +7,7 @@
 
 #include "../../includes/server/Server.hpp"
 
-Client::Client(std::string ip, std::string username, state) : _ip(ip), _username(username), _state(state)
+Client::Client(std::string ip, std::string username, bool state) : _ip(ip), _username(username), _state(state)
 {
 	_state = false;
 }
