@@ -10,7 +10,7 @@
 
 namespace Babel {
 
-PaInput::PaInput() : _sound({})
+PaInput::PaInput()
 {
 	_error = Pa_Initialize();
 	if (_error != paNoError) {
@@ -48,7 +48,6 @@ int PaInput::RecordCallback(const void *inputBuffer, void *outputBuffer, unsigne
 
 	if (inputBuffer == nullptr) {
 		for (size_t count = 0; count < framesPerBuffer; count++) {
-			thisRef->
 		}
 	} else {
 		for (size_t count = 0; count < framesPerBuffer; count++) {
