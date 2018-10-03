@@ -1,8 +1,8 @@
 #include <stdexcept>
 #include <vector>
-#include <DecodedSound.hpp>
-#include <PaInput.hpp>
-#include <SoundDeviceSettings.hpp>
+#include "SoundDeviceSettings.hpp"
+#include "DecodedSound.hpp"
+#include "PaInput.hpp"
 
 Babel::PaInput::PaInput()
 {
@@ -41,11 +41,11 @@ int Babel::PaInput::RecordCallback(const void *inputBuffer, void *outputBuffer, 
 	auto         thisRef = reinterpret_cast<PaInput *>(userData);
 	DecodedSound sound   = {};
 
-	if (inputBuffer == nullptr) {
-		for (size_t count = 0; count < framesPerBuffer; count++) {
-		}
-	} else {
-		for (size_t count = 0; count < framesPerBuffer; count++) {
+	for (size_t count = 0; count < framesPerBuffer; count++) {
+		if (inputBuffer == nullptr) {
+			sound.buffer.push_back(SoundDeviceSetting::SAMPLE_SILENCE);
+		} else {
+			sound.buffer.push_back(input[count]);
 		}
 	}
 	thisRef->addSound(sound);
@@ -66,9 +66,15 @@ bool Babel::PaInput::stop()
 
 Babel::DecodedSound Babel::PaInput::getSound() const
 {
-	DecodedSound sound = std::move(_sounds.front());
+	DecodedSound sound;
 
-	_sounds.erase(_sounds.begin());
+	if (!_sounds.empty()) {
+		sound = std::move(_sounds.front());
+		_sounds.erase(_sounds.begin());
+	} else {
+		sound.buffer = std::vector<float>(SoundDeviceSetting::framePerBuffer, 0.0f);
+		sound.size = SoundDeviceSetting::framePerBuffer;
+	}
 	return sound;
 }
 

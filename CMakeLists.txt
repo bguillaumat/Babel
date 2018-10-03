@@ -1,7 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 project(CPP_babel_2018
         VERSION 0.0.0
-        DESCRIPTION "It's a babel :p")
+        DESCRIPTION "It's a babel :p"
+        LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -18,7 +19,7 @@ endif ()
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-find_package(Threads)
+find_package(Threads REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
 
 include_directories(includes/common)
