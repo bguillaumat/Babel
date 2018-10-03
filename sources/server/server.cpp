@@ -5,4 +5,4 @@
 ** server.cpp
 */
 
-#include "../../includes/server/server.hpp"
+#include "../../includes/server/Server.hpp"
