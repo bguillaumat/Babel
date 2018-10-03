@@ -1,12 +1,9 @@
-
 #include <stdexcept>
-#include <SoundDeviceSettings.hpp>
-#include <iostream>
+#include "SoundDeviceSettings.hpp"
 #include "PaOutput.hpp"
 
-namespace Babel {
-
-PaOutput::PaOutput() {
+Babel::PaOutput::PaOutput()
+{
 	_error = Pa_Initialize();
 	if (_error != paNoError) {
 		throw std::runtime_error("Unable to initialize PortAudio");
@@ -15,33 +12,32 @@ PaOutput::PaOutput() {
 	if (_parameters.device == paNoDevice) {
 		throw std::runtime_error("No default output device.");
 	}
-	_parameters.channelCount = SoundDeviceSetting::channels;
-	_parameters.sampleFormat = paFloat32;
-	_parameters.suggestedLatency = Pa_GetDeviceInfo(_parameters.device)->defaultLowInputLatency;
+	_parameters.channelCount              = SoundDeviceSetting::channels;
+	_parameters.sampleFormat              = paFloat32;
+	_parameters.suggestedLatency          = Pa_GetDeviceInfo(_parameters.device)->defaultLowInputLatency;
 	_parameters.hostApiSpecificStreamInfo = nullptr;
 	_error = Pa_OpenStream(&_stream, nullptr, &_parameters, (double)SoundDeviceSetting::sampleRate, SoundDeviceSetting::framePerBuffer, paClipOff, PlayCallback, nullptr);
 	if (_error != paNoError) {
 		throw std::runtime_error("Unable to open stream.");
 	}
-
 }
 
-PaOutput::~PaOutput()
+Babel::PaOutput::~PaOutput()
 {
 	Pa_CloseStream(_stream);
 	Pa_Terminate();
 }
 
 //Callback record
-int PaOutput::PlayCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags, void *userData)
+int Babel::PaOutput::PlayCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags, void *userData)
 {
 	(void)userData;
 	(void)timeInfo;
 	(void)statusFlags;
 	(void)inputBuffer;
-	float	*output = (float*)outputBuffer;
+	float *output = (float *)outputBuffer;
 
-	for (size_t i = 0; i < framesPerBuffer ; i++) {
+	for (size_t i = 0; i < framesPerBuffer; i++) {
 		*output++ = SoundDeviceSetting::SAMPLE_SILENCE;
 		if (SoundDeviceSetting::channels == 2) {
 			*output++ = SoundDeviceSetting::SAMPLE_SILENCE;
@@ -50,20 +46,19 @@ int PaOutput::PlayCallback(const void *inputBuffer, void *outputBuffer, unsigned
 	return paContinue;
 }
 
-bool PaOutput::start()
+bool Babel::PaOutput::start()
 {
 	_error = Pa_StartStream(_stream);
 	return _error == paNoError;
 }
 
-bool PaOutput::stop()
+bool Babel::PaOutput::stop()
 {
 	_error = Pa_StopStream(_stream);
 	return _error == paNoError;
 }
 
-DecodedSound	PaOutput::getSound() const
+Babel::DecodedSound Babel::PaOutput::getSound() const
 {
 	return _sound;
 }
-} // namespace Babel
