@@ -31,7 +31,7 @@ SET(CLIENT_SRCS
 	sources/client/main.cpp
 	sources/client/Opus.cpp
 	sources/client/PaInput.cpp
-	sources/client/PaOutput.cpp sources/server/server.cpp includes/server/Server.hpp sources/server/server_commands.cpp)
+	sources/client/PaOutput.cpp)
 
 add_executable(babel_client ${CLIENT_SRCS} ${COMMON_SRCS} includes/client/IAudio.hpp)
 

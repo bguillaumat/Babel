@@ -27,17 +27,17 @@ class Client {
 private:
 	const std::string	_ip;
 	const std::string	_username;
-	bool		_state = false;
+	bool			_state;
 
 public:
 	~Client();
 	Client(std::string, std::string);
 	const std::string	getIp();
 	const std::string	getUsername();
-	void			setIp();
-	void			setUsername();
-	void			client_connected();
-	void			client_disconnected();
+	void	setIp(std::string);
+	void	setUsername(std::string);
+	void	client_connected();
+	void	client_disconnected();
 };
 
 class Clients {

@@ -12,16 +12,14 @@ namespace Babel {
 	public:
 		Opus();
 		~Opus() override;
-		EncodedSound	encodeSound(DecodedSound &decodedSound) override;
-		DecodedSound	decodeSound(EncodedSound &soundEncode) override;
+		EncodedSound encodeSound(DecodedSound &decodedSound) override;
+		DecodedSound decodeSound(EncodedSound &soundEncode) override;
 
 	private:
 		//This is use for encode sound to opus codec
-		OpusEncoder	*_encoder;
+		OpusEncoder *_encoder;
 		//This is use for decode a sound with opus codec
-		OpusDecoder	*_decoder;
-
+		OpusDecoder *_decoder;
 	};
-
 } // namespace Babel
 #endif
