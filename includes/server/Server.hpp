@@ -4,6 +4,7 @@
 ** File description:
 ** server.hpp
 */
+
 #ifndef CPP_BABEL_2018_SERVER_HPP
 #define CPP_BABEL_2018_SERVER_HPP
 
@@ -19,7 +20,7 @@
 #include <string>
 
 class Client {
-public:
+private:
 	std::string	_ip;
 	std::string	_username;
 };
