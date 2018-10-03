@@ -17,6 +17,7 @@
 	#include <winsock2.h>
 #endif
 
+#include <set>
 #include <string>
 #include <boost/asio.hpp>
 
@@ -24,11 +25,11 @@ class Client {
 private:
 	const std::string	_ip;
 	const std::string	_username;
-	bool		_state = false;
+	bool			_state;
 
 public:
 	~Client();
-	Client(ip, username);
+	Client(std::string, std::string);
 	const std::string	getIp();
 	const std::string	getUsername();
 	void	setIp(std::string);

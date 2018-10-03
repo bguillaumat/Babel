@@ -7,8 +7,9 @@
 
 #include "../../includes/server/Server.hpp"
 
-Client::Client(ip, username) : _ip(_ip), _username(_username)
+Client::Client(std::string ip, std::string username, state) : _ip(ip), _username(username), _state(state)
 {
+	_state = false;
 }
 
 Client::~Client()
@@ -17,11 +18,13 @@ Client::~Client()
 
 void Client::client_connected()
 {
+	_state = true;
 	std::cout<<"The user "<<this->_username<<" is connected now"<<std::endl;
 }
 
 void Client::client_disconnected()
 {
+	_state = false;
 	std::cout<<"The user "<<this->_username<<" is now deconnected"std::endl;
 }
 
@@ -32,7 +35,7 @@ const std::string Client::getIp()
 
 const std::string Client::getUsername()
 {
-	return _username
+	return _username;
 }
 
 void Client::setIp(std::string ipaddress)
