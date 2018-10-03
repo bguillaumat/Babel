@@ -6,3 +6,23 @@
 */
 
 #include "../../includes/server/Server.hpp"
+
+Client::Client(ip, username)
+{
+}
+
+void Client::client_connected()
+{
+}
+
+void Client::client_disconnected()
+{
+}
+
+const std::string Client::getIp()
+{
+}
+
+const std::string Client::getUsername()
+{
+}
