@@ -3,11 +3,15 @@
 #include <SoundDeviceSettings.hpp>
 #include <iostream>
 #include <vector>
+#include <DecodedSound.hpp>
+#include <PaInput.hpp>
+
 #include "PaInput.hpp"
 
 namespace Babel {
 
-PaInput::PaInput() {
+PaInput::PaInput() : _sound({})
+{
 	_error = Pa_Initialize();
 	if (_error != paNoError) {
 		throw std::runtime_error("Unable to initialize PortAudio");
@@ -20,7 +24,7 @@ PaInput::PaInput() {
 	_parameters.sampleFormat = paFloat32;
 	_parameters.suggestedLatency = Pa_GetDeviceInfo(_parameters.device)->defaultLowInputLatency;
 	_parameters.hostApiSpecificStreamInfo = nullptr;
-	_error = Pa_OpenStream(&_stream, &_parameters, nullptr, (double)SoundDeviceSetting::sampleRate, SoundDeviceSetting::framePerBuffer, paClipOff, RecordCallback, nullptr);
+	_error = Pa_OpenStream(&_stream, &_parameters, nullptr, (double)SoundDeviceSetting::sampleRate, SoundDeviceSetting::framePerBuffer, paClipOff, RecordCallback, this);
 	if (_error != paNoError) {
 		throw std::runtime_error("Unable to open stream.");
 	}
@@ -32,30 +36,50 @@ PaInput::~PaInput() {
 }
 
 //Callback record
-int PaInput::RecordCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags, void * userData)
+int PaInput::RecordCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer,const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags, void *userData)
 {
 	(void)outputBuffer;
-	(void)userData;
 	(void)timeInfo;
 	(void)statusFlags;
 	(void)framesPerBuffer;
-	auto	input = static_cast<const float *>(inputBuffer);
+	auto	input = reinterpret_cast<const float *>(inputBuffer);
+	auto	thisRef = reinterpret_cast<PaInput *>(userData);
+	DecodedSound	sound = {};
 
 	if (inputBuffer == nullptr) {
-
+		for (size_t count = 0; count < framesPerBuffer; count++) {
+			thisRef->
+		}
+	} else {
+		for (size_t count = 0; count < framesPerBuffer; count++) {
+		}
 	}
+	thisRef->addSound(sound);
 	return paContinue;
 }
 
-bool PaInput::start() {
+bool	PaInput::start()
+{
 	_error = Pa_StartStream(_stream);
 	return _error == paNoError;
 }
 
-bool PaInput::stop() {
+bool	PaInput::stop()
+{
 	_error = Pa_StopStream(_stream);
 	return _error == paNoError;
 }
 
+DecodedSound	PaInput::getSound() const
+{
+	DecodedSound	sound = std::move(_sounds.front());
 
+	_sounds.erase(_sounds.begin());
+	return sound;
+}
+
+void	PaInput::addSound(DecodedSound &sound)
+{
+	_sounds.push_back(sound);
+}
 } // namespace Babel

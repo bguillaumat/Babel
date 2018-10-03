@@ -15,12 +15,13 @@ class PaOutput : public IAudio {
 		static int	PlayCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags, void *userData);
 		bool	start() override;
 		bool	stop() override;
+		DecodedSound getSound() const override;
 
-	private:
+private:
 		PaStream		*_stream = nullptr;
 		PaStreamParameters	_parameters;
 		PaError			_error;
-		PaStreamParameters	_paParams;
+		DecodedSound		_sound;
 };
 
 } // namespace Babel

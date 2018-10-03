@@ -10,7 +10,7 @@
 	#include <sys/socket.h>
 	#include <netinet/in.h>
 	#include <arpa/inet.h>
-#elif _WIN32 
+#elif _WIN32
 	#include <winsock2.h>
 #endif
 
@@ -86,11 +86,11 @@ int	main(int ac, char *av[])
 {
 	QApplication	app(ac, av);
 	QPushButton		button("Salut les Zéros, la forme ?");
-//	Babel::ICompressor	*compressor = new Babel::Opus();
+	Babel::ICompressor	*compressor = new Babel::Opus();
 	Babel::IAudio		*audio1 = new Babel::PaOutput();
 	Babel::IAudio		*audio = new Babel::PaInput();
 
-	socket_udp();
+//	socket_udp();
 	audio->start();
 	audio1->start();
 	button.show();

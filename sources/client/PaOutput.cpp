@@ -42,9 +42,9 @@ int PaOutput::PlayCallback(const void *inputBuffer, void *outputBuffer, unsigned
 	float	*output = (float*)outputBuffer;
 
 	for (size_t i = 0; i < framesPerBuffer ; i++) {
-		*output++ = 0.0f;
+		*output++ = SoundDeviceSetting::SAMPLE_SILENCE;
 		if (SoundDeviceSetting::channels == 2) {
-			*output++ = 0.0f;
+			*output++ = SoundDeviceSetting::SAMPLE_SILENCE;
 		}
 	}
 	return paContinue;
@@ -62,5 +62,8 @@ bool PaOutput::stop()
 	return _error == paNoError;
 }
 
-
+DecodedSound	PaOutput::getSound() const
+{
+	return _sound;
+}
 } // namespace Babel

@@ -6,6 +6,7 @@ namespace Babel {
 		static const unsigned long	channels = 2;
 		static const unsigned long	frameSize = 0;
 		static const unsigned long	framePerBuffer = 512;
+		static const float		SAMPLE_SILENCE = 0.0f;
 	}
 
 }
