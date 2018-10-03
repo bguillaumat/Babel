@@ -13,11 +13,11 @@
 
 class IObservable {
 public:
-	void	notify() const;
-	void	addListener(IObservateur *observateur);
-	void	supprimerObservateur(IObservateur *observateur);
+	void notify() const;
+	void addListener(IObservateur *observateur);
+	void supprimerObservateur(IObservateur *observateur);
 private:
-	std::list<IObservateur *>	_observateurs;
+	std::list<IObservateur *> _observateurs;
 };
 
 #endif //CPP_BABEL_2018_IOBSERVABLE_HPP

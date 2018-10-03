@@ -11,14 +11,15 @@
 #include <string>
 #include <map>
 
-template <class Object, class Key = std::string>
+template<class Object, class Key = std::string>
 class Factory {
 public:
 	Factory() = default;
-	void	Register(Key key,Object* obj);
-	Object	*Make(const Key& key);
+	void Register(Key key, Object *obj);
+	Object *Make(const Key &key);
 
 private:
-	std::map<Key, Object *>	_map;
+	std::map<Key, Object *> _map;
 };
+
 #endif //CPP_BABEL_2018_FACTORY_HPP

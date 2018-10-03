@@ -10,6 +10,7 @@
 
 class IObservateur {
 public:
-	virtual void	notifier() = 0;
+	virtual void notifier() = 0;
 };
+
 #endif //CPP_BABEL_2018_IOBSERVATEUR_HPP

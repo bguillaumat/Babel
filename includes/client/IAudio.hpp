@@ -5,13 +5,12 @@
 
 namespace Babel {
 
-class IAudio {
+	class IAudio {
 	public:
 		virtual ~IAudio() = default;
 		virtual bool start() = 0;
 		virtual bool stop() = 0;
-		virtual Babel::DecodedSound	getSound() const = 0;
-};
-
+		virtual Babel::DecodedSound getSound() const = 0;
+	};
 } // namespace Babel
 #endif
