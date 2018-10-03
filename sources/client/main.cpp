@@ -27,8 +27,7 @@ int main(int ac, char *av[])
 		audio->stop();
 		audio1->stop();
 	} catch (const std::runtime_error &runtimeError) {
-		std::cerr << "A runtime error occur:" << std::endl << "\t"
-			<< runtimeError.what() << std::endl;
+		std::cerr << "A runtime error occur:" << std::endl << "\t" << runtimeError.what() << std::endl;
 		return 84;
 	}
 	return 0;
