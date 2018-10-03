@@ -6,3 +6,12 @@
 */
 
 #include "../../includes/server/server.hpp"
+
+void	client_connected()
+{}
+
+void	client_disconnected()
+{}
+
+void	print_ip_address()
+{}
