@@ -23,4 +23,9 @@
 using boost::asio::ip::tcp;
 using namespace boost::chrono;
 
+class Server {
+	private:
+	public:
+};
+
 #endif //CPP_BABEL_2018_SERVER_HPP
