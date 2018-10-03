@@ -50,5 +50,5 @@ add_executable(babel_server ${SERVER_SRCS} ${COMMON_SRCS})
 
 target_include_directories(babel_server PRIVATE includes/server)
 
-target_link_libraries(babel_server ${CONAN_LIBS})
+target_link_libraries(babel_server ${CONAN_LIBS} -lpthread)
 #############################################
