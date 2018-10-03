@@ -5,7 +5,7 @@
 ** log_funcs.cpp
 */
 
-#include "../../includes/server/Server.hpp"
+#include "../../includes/server/Client.hpp"
 
 Client::Client(std::string ip, std::string username, bool state) : _ip(ip), _username(username), _state(state)
 {
@@ -40,8 +40,10 @@ const std::string Client::getUsername()
 
 void Client::setIp(std::string ipaddress)
 {
+	this->_ip = ipaddress;
 }
 
 void Client::setUsername(std::string username)
 {
+	this->_username = username;
 }

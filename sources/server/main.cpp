@@ -5,10 +5,7 @@
 ** Created by asianpw,
 */
 
-#include <iostream>
-#include <boost/chrono.hpp>
-
-using namespace boost::chrono;
+#include "Server.hpp"
 
 int	main(int ac, char *av[])
 {
