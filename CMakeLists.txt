@@ -6,6 +6,10 @@ project(CPP_babel_2018
 
 set(CMAKE_CXX_STANDARD 17)
 
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+
 if (MSVC)
     if (CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
         string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
@@ -20,12 +24,14 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 find_package(Threads REQUIRED)
+find_package(Qt5Network CONFIG REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
 
 include_directories(includes/common)
 SET(COMMON_SRCS
         sources/common/Factory.cpp
-        sources/common/IObservable.cpp)
+        sources/common/IObservable.cpp
+        sources/common/PrintVector.cpp)
 
 ############################################
 
@@ -33,9 +39,10 @@ SET(CLIENT_SRCS
         sources/client/main.cpp
         sources/client/Opus.cpp
         sources/client/PaInput.cpp
-        sources/client/PaOutput.cpp)
+        sources/client/PaOutput.cpp
+        sources/client/Core.cpp sources/client/UI/Login.cpp includes/client/UI/Login.hpp)
 
-add_executable(babel_client ${CLIENT_SRCS} ${COMMON_SRCS} includes/client/IAudio.hpp)
+add_executable(babel_client ${CLIENT_SRCS} ${COMMON_SRCS})
 
 target_include_directories(babel_client PRIVATE includes/client)
 
@@ -43,10 +50,10 @@ target_link_libraries(babel_client ${CONAN_LIBS} Qt5::Widgets)
 #############################################
 
 SET(SERVER_SRCS
-		sources/server/main.cpp
-		sources/server/Server.cpp
-		sources/server/Client.cpp
-		sources/server/server_commands.cpp)
+        sources/server/main.cpp
+        sources/server/Server.cpp
+        sources/server/Client.cpp
+        sources/server/server_commands.cpp)
 
 add_executable(babel_server ${SERVER_SRCS} ${COMMON_SRCS})
 

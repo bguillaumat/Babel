@@ -7,35 +7,41 @@
 
 #include <iostream>
 #include <QApplication>
-#include <QPushButton>
 #include <PaOutput.hpp>
 #include <PaInput.hpp>
+#include <UI/Login.hpp>
 #include "ICompressor.hpp"
 #include "Opus.hpp"
+
+void audio()
+{
+	Babel::ICompressor  *compressor = new Babel::Opus();
+	Babel::IAudio       *paOutput   = new Babel::PaOutput();
+	Babel::IAudio       *paInput    = new Babel::PaInput();
+	Babel::DecodedSound sound;
+	Babel::EncodedSound encodedSound;
+
+	paInput->start();
+	paOutput->start();
+	Pa_Sleep(3 * 1000);
+	for (size_t i = 0; i < 500; i++) {
+		sound        = paInput->getSound();
+		encodedSound = compressor->encodeSound(sound);
+		paOutput->setSound(compressor->decodeSound(encodedSound));
+	}
+	Pa_Sleep(3 * 1000);
+	paInput->stop();
+	paOutput->stop();
+}
 
 int main(int ac, char *av[])
 {
 	try {
-		//		QApplication        app(ac, av);
-		//		QPushButton         button("Salut les Zéros, la forme ?");
-		Babel::ICompressor  *compressor = new Babel::Opus();
-		Babel::IAudio       *paOutput   = new Babel::PaOutput();
-		Babel::IAudio       *paInput    = new Babel::PaInput();
-		Babel::DecodedSound sound;
-		Babel::EncodedSound encodedSound;
+		QApplication     app(ac, av);
+		Babel::UI::Login login;
 
-		paInput->start();
-		paOutput->start();
-		Pa_Sleep(3 * 1000);
-		for (size_t i = 0; i < 500; i++) {
-			sound        = paInput->getSound();
-			encodedSound = compressor->encodeSound(sound);
-			paOutput->setSound(
-				compressor->decodeSound(encodedSound));
-		}
-		Pa_Sleep(3 * 1000);
-		paInput->stop();
-		paOutput->stop();
+		login.show();
+		app.exec();
 	} catch (const std::runtime_error &runtimeError) {
 		std::cerr << "A runtime error occur:" << std::endl << "\t"
 			<< runtimeError.what() << std::endl;
