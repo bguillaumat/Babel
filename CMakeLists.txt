@@ -50,7 +50,7 @@ SET(SERVER_SRCS
 
 add_executable(babel_server ${SERVER_SRCS} ${COMMON_SRCS})
 
-target_include_directories(babel_server PRIVATE includes/server)
+target_include_directories(babel_server PRIVATE includes/server/)
 
 target_link_libraries(babel_server ${CONAN_LIBS} ${CMAKE_THREAD_LIBS_INIT})
 #############################################
