@@ -19,13 +19,18 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include <boost/chrono.hpp>
+#include "Client.hpp"
 
 using boost::asio::ip::tcp;
 using namespace boost::chrono;
 
 class Server {
-	private:
-	public:
+private:
+	//clients class??
+
+public:
+	~Server();
+	Server();
 };
 
 #endif //CPP_BABEL_2018_SERVER_HPP
