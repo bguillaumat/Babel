@@ -1,7 +1,8 @@
 #include <stdexcept>
 #include <vector>
-#include "SoundDeviceSettings.hpp"
+#include <iostream>
 #include "DecodedSound.hpp"
+#include "SoundDeviceSettings.hpp"
 #include "PaInput.hpp"
 
 Babel::PaInput::PaInput()
@@ -33,19 +34,27 @@ Babel::PaInput::~PaInput()
 //Callback record
 int Babel::PaInput::RecordCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags, void *userData)
 {
-	(void)outputBuffer;
-	(void)timeInfo;
-	(void)statusFlags;
-	(void)framesPerBuffer;
 	auto         input   = reinterpret_cast<const float *>(inputBuffer);
 	auto         thisRef = reinterpret_cast<PaInput *>(userData);
 	DecodedSound sound   = {};
 
+	(void)outputBuffer;
+	(void)timeInfo;
+	(void)statusFlags;
+	(void)framesPerBuffer;
 	for (size_t count = 0; count < framesPerBuffer; count++) {
 		if (inputBuffer == nullptr) {
 			sound.buffer.push_back(SoundDeviceSetting::SAMPLE_SILENCE);
+			if (SoundDeviceSetting::channels == 2) {
+				sound.buffer.push_back(
+					SoundDeviceSetting::SAMPLE_SILENCE);
+			}
 		} else {
-			sound.buffer.push_back(input[count]);
+			sound.buffer.push_back(*input++);
+			if (SoundDeviceSetting::channels == 2) {
+				sound.buffer.push_back(*input++);
+			}
+
 		}
 	}
 	thisRef->addSound(sound);
@@ -69,16 +78,28 @@ Babel::DecodedSound Babel::PaInput::getSound() const
 	DecodedSound sound;
 
 	if (!_sounds.empty()) {
+		_lock.lock();
 		sound = std::move(_sounds.front());
 		_sounds.erase(_sounds.begin());
+		_lock.unlock();
 	} else {
-		sound.buffer = std::vector<float>(SoundDeviceSetting::framePerBuffer, 0.0f);
-		sound.size = SoundDeviceSetting::framePerBuffer;
+		sound.buffer = std::vector<float>(
+			SoundDeviceSetting::framePerBuffer,
+			SoundDeviceSetting::SAMPLE_SILENCE);
+		sound.size   = SoundDeviceSetting::framePerBuffer;
 	}
+
 	return sound;
 }
 
 void Babel::PaInput::addSound(DecodedSound &sound)
 {
-	_sounds.push_back(sound);
+	_lock.lock();
+	_sounds.emplace_back(sound);
+	_lock.unlock();
+}
+
+void Babel::PaInput::setSound(const DecodedSound &sound)
+{
+	(void)sound;
 }

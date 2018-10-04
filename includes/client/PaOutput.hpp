@@ -2,6 +2,7 @@
 #define BABEL_PAOUTPUT_H
 
 #include <portaudio.h>
+#include <mutex>
 #include "IAudio.hpp"
 
 namespace Babel {
@@ -16,12 +17,14 @@ namespace Babel {
 		bool start() override;
 		bool stop() override;
 		DecodedSound getSound() const override;
+		void setSound(const DecodedSound &sound) override;
 
 	private:
-		PaStream           *_stream = nullptr;
-		PaStreamParameters _parameters;
-		PaError            _error;
-		DecodedSound       _sound;
+		PaStream                         *_stream = nullptr;
+		PaStreamParameters               _parameters;
+		PaError                          _error;
+		std::vector<Babel::DecodedSound> _sounds;
+		mutable std::mutex               _lock;
 	};
 } // namespace Babel
 #endif

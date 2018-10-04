@@ -11,6 +11,7 @@ namespace Babel {
 		virtual bool start() = 0;
 		virtual bool stop() = 0;
 		virtual Babel::DecodedSound getSound() const = 0;
+		virtual void setSound(const DecodedSound &sound) = 0;
 	};
 } // namespace Babel
 #endif

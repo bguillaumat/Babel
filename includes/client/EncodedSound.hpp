@@ -6,7 +6,7 @@
 namespace Babel {
 	typedef struct EncodedSound {
 		std::vector<unsigned char> buffer;
-		unsigned long              size = 0;
+		int                        size = 0;
 	} EncodedSound;
 } // namespace Babel
 #endif

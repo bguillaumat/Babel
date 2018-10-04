@@ -12,8 +12,8 @@ namespace Babel {
 	public:
 		Opus();
 		~Opus() override;
-		EncodedSound encodeSound(DecodedSound &decodedSound) override;
-		DecodedSound decodeSound(EncodedSound &soundEncode) override;
+		EncodedSound encodeSound(const DecodedSound &decodedSound) override;
+		DecodedSound decodeSound(const EncodedSound &soundEncode) override;
 
 	private:
 		//This is use for encode sound to opus codec

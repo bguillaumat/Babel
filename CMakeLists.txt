@@ -16,17 +16,27 @@ elseif (CMAKE_COMPILER_IS_GNUCC OR CMAKE_COMPILER_IS_GNUCXX)
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra")
 endif ()
 
+# Find includes in corresponding build directories
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+# Instruct CMake to run moc automatically when needed
+set(CMAKE_AUTOMOC ON)
+# Create code from a list of Qt designer ui files
+set(CMAKE_AUTOUIC ON)
+
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 find_package(Threads REQUIRED)
 find_package(Qt5Widgets CONFIG REQUIRED)
 
-include_directories(includes/common)
 SET(COMMON_SRCS
         sources/common/Factory.cpp
-        sources/common/IObservable.cpp)
+        sources/common/IObservable.cpp
+        sources/common/PrintVector.cpp)
 
+add_library(babel_lib STATIC ${COMMON_SRCS})
+
+target_include_directories(babel_lib PRIVATE includes/common)
 ############################################
 
 SET(CLIENT_SRCS
@@ -35,22 +45,22 @@ SET(CLIENT_SRCS
         sources/client/PaInput.cpp
         sources/client/PaOutput.cpp)
 
-add_executable(babel_client ${CLIENT_SRCS} ${COMMON_SRCS} includes/client/IAudio.hpp)
+add_executable(babel_client ${CLIENT_SRCS} ${COMMON_SRCS})
 
-target_include_directories(babel_client PRIVATE includes/client)
+target_include_directories(babel_client PRIVATE includes/client includes/common)
 
 target_link_libraries(babel_client ${CONAN_LIBS} Qt5::Widgets)
 #############################################
 
 SET(SERVER_SRCS
-		sources/server/main.cpp
-		sources/server/Server.cpp
-		sources/server/Client.cpp
-		sources/server/server_commands.cpp)
+        sources/server/main.cpp
+        sources/server/Server.cpp
+        sources/server/Client.cpp
+        sources/server/server_commands.cpp)
 
-add_executable(babel_server ${SERVER_SRCS} ${COMMON_SRCS})
+add_executable(babel_server ${SERVER_SRCS})
 
-target_include_directories(babel_server PRIVATE includes/server)
+target_include_directories(babel_server PRIVATE includes/server includes/common)
 
 target_link_libraries(babel_server ${CONAN_LIBS} ${CMAKE_THREAD_LIBS_INIT})
 #############################################

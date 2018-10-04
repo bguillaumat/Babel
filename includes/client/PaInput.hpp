@@ -2,12 +2,13 @@
 #define BABEL_PAINPUT_H
 
 #include <portaudio.h>
+#include <mutex>
 #include "DecodedSound.hpp"
 #include "IAudio.hpp"
 
 namespace Babel {
 
-	//This class take sound from the first micro on the device
+	//This class take sound from the default micro on the device
 	class PaInput : public IAudio {
 	public:
 		PaInput();
@@ -17,6 +18,7 @@ namespace Babel {
 		bool start() override;
 		bool stop() override;
 		DecodedSound getSound() const override;
+		void setSound(const DecodedSound &sound) override;
 	private:
 		void addSound(DecodedSound &);
 
@@ -26,6 +28,7 @@ namespace Babel {
 		PaStreamParameters                _parameters;
 		PaError                           _error;
 		mutable std::vector<DecodedSound> _sounds;
+		mutable std::mutex                _lock;
 	};
 } // namespace Babel
 #endif
