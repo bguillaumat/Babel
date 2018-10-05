@@ -24,8 +24,7 @@ include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
 find_package(Threads REQUIRED)
-find_package(Qt5Network CONFIG REQUIRED)
-find_package(Qt5Widgets CONFIG REQUIRED)
+find_package(Qt5 COMPONENTS Gui Core Widgets Network REQUIRED)
 
 include_directories(includes/common)
 SET(COMMON_SRCS
@@ -40,13 +39,19 @@ SET(CLIENT_SRCS
         sources/client/Opus.cpp
         sources/client/PaInput.cpp
         sources/client/PaOutput.cpp
-        sources/client/Core.cpp sources/client/UI/Login.cpp includes/client/UI/Login.hpp)
+        sources/client/Core.cpp
+        sources/client/UI/Login.cpp
+        includes/client/UI/Login.hpp
+        sources/client/UI/Home.cpp
+        sources/client/Network/UDPNetwork.cpp
+        includes/client/Network/UDPNetwork.hpp
+        includes/client/Network/NetworkConfig.hpp sources/client/UI/Call.cpp includes/client/UI/Call.hpp sources/client/Network/TCPNetwork.cpp includes/client/Network/TCPNetwork.hpp)
 
 add_executable(babel_client ${CLIENT_SRCS} ${COMMON_SRCS})
 
 target_include_directories(babel_client PRIVATE includes/client)
 
-target_link_libraries(babel_client ${CONAN_LIBS} Qt5::Widgets)
+target_link_libraries(babel_client ${CONAN_LIBS} Qt5::Widgets Qt5::Core Qt5::Gui Qt5::Network)
 #############################################
 
 SET(SERVER_SRCS

@@ -6,12 +6,10 @@
 */
 
 #include <iostream>
-#include <QApplication>
 #include <PaOutput.hpp>
-#include <PaInput.hpp>
-#include <UI/Login.hpp>
+#include <includes/client/Network/UDPNetwork.hpp>
 #include "ICompressor.hpp"
-#include "Opus.hpp"
+#include "Core.hpp"
 
 void audio()
 {
@@ -37,11 +35,10 @@ void audio()
 int main(int ac, char *av[])
 {
 	try {
-		QApplication     app(ac, av);
-		Babel::UI::Login login;
+		Core                       core(ac, av);
+		Babel::Network::UDPNetwork network;
 
-		login.show();
-		app.exec();
+		core.run();
 	} catch (const std::runtime_error &runtimeError) {
 		std::cerr << "A runtime error occur:" << std::endl << "\t"
 			<< runtimeError.what() << std::endl;
