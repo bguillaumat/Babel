@@ -5,8 +5,10 @@
 ** Created by asianpw,
 */
 
+#include <iostream>
 #include <QNetworkInterface>
-#include <includes/client/Network/UDPNetwork.hpp>
+#include "includes/client/Network/NetworkConfig.hpp"
+#include "includes/client/Network/UDPNetwork.hpp"
 
 Babel::Network::UDPNetwork::UDPNetwork()
 {

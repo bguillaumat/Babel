@@ -6,8 +6,10 @@
 */
 
 #include <iostream>
-#include <PaOutput.hpp>
-#include <includes/client/Network/UDPNetwork.hpp>
+#include "PaOutput.hpp"
+#include "includes/client/Network/UDPNetwork.hpp"
+#include "includes/client/Opus.hpp"
+#include "includes/client/PaInput.hpp"
 #include "ICompressor.hpp"
 #include "Core.hpp"
 
