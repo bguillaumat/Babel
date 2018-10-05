@@ -7,7 +7,7 @@
 #ifndef CPP_BABEL_2018_LOGIN_HPP
 #define CPP_BABEL_2018_LOGIN_HPP
 
-#include <QtWidgets/QWidget>
+#include <QtWidgets>
 #include <QPushButton>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QVBoxLayout>
@@ -21,22 +21,23 @@ namespace Babel {
 		Q_OBJECT
 
 		public:
-			Login();
+			Login(QStackedWidget &stack);
 
-		public slots:
+		private slots:
 			void tryLogin();
 
 		private:
-			size_t      _width;
-			size_t      _height;
-			QPushButton *_signin;
-			QPushButton *_signup;
-			QHBoxLayout *_buttonLayout;
-			QFormLayout *_form;
-			QVBoxLayout *_layout;
-			QPalette    _background;
-			QLineEdit   *_id;
-			QLineEdit   *_pwd;
+			size_t         _width;
+			size_t         _height;
+			QPushButton    *_signin;
+			QPushButton    *_signup;
+			QHBoxLayout    *_buttonLayout;
+			QFormLayout    *_form;
+			QVBoxLayout    *_layout;
+			QPalette       _background;
+			QLineEdit      *_id;
+			QLineEdit      *_pwd;
+			QStackedWidget &_stack;
 		};
 	}
 }
