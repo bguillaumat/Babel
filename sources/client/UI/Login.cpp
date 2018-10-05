@@ -8,7 +8,7 @@
 #include <iostream>
 #include "UI/Login.hpp"
 
-Babel::UI::Login::Login(QStackedWidget &stack)
+Babel::UI::Login::Login(QStackedWidget *stack)
 	: QWidget(), _width(500), _height(400), _stack(stack)
 {
 	_signin       = new QPushButton("Sign In");
@@ -55,6 +55,6 @@ void Babel::UI::Login::tryLogin()
 		_pwd->setPlaceholderText("Please enter a password");
 	}
 	if (!_id->text().isEmpty() && !_pwd->text().isEmpty()) {
-		_stack.setCurrentIndex(1);
+		_stack->setCurrentIndex(1);
 	}
 }

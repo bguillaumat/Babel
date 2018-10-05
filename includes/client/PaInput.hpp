@@ -4,6 +4,7 @@
 #include <portaudio.h>
 #include <mutex>
 #include "DecodedSound.hpp"
+#include "includes/client/Network/UDPNetwork.hpp"
 #include "IAudio.hpp"
 
 namespace Babel {
@@ -11,7 +12,7 @@ namespace Babel {
 	//This class take sound from the default micro on the device
 	class PaInput : public IAudio {
 	public:
-		PaInput();
+		PaInput(Babel::Network::UDPNetwork *udp);
 		~PaInput() override;
 		//Callback record
 		static int RecordCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags, void *userData);
@@ -29,6 +30,7 @@ namespace Babel {
 		PaError                           _error;
 		mutable std::vector<DecodedSound> _sounds;
 		mutable std::mutex                _lock;
+		Babel::Network::UDPNetwork        *_udp;
 	};
 } // namespace Babel
 #endif

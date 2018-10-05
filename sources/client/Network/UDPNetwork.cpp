@@ -7,10 +7,11 @@
 
 #include <iostream>
 #include <QNetworkInterface>
-#include "includes/client/Network/NetworkConfig.hpp"
+#include <includes/client/DecodedSound.hpp>
+#include <QtCore/QDataStream>
 #include "includes/client/Network/UDPNetwork.hpp"
 
-Babel::Network::UDPNetwork::UDPNetwork()
+Babel::Network::UDPNetwork::UDPNetwork(Babel::IAudio *out) : _output(out)
 {
 	bool error;
 
@@ -29,12 +30,24 @@ Babel::Network::UDPNetwork::UDPNetwork()
 	}
 	QObject::connect(_socket, SIGNAL(readyRead()), this,
 			 SLOT(readDatagram()));
-	sendDatagram();
+}
+
+template<typename T>
+std::ostream &operator<<(std::ostream &out, const std::vector<T, std::allocator<T>> &v)
+{
+	if (!v.empty()) {
+		out << '[';
+		std::copy(v.begin(), v.end(),
+			  std::ostream_iterator<T>(out, ", "));
+		out << "\b\b]";
+	}
+	return out;
 }
 
 void Babel::Network::UDPNetwork::readDatagram()
 {
 	while (_socket->hasPendingDatagrams()) {
+		DecodedSound sound = {};
 		QByteArray   buffer;
 		QHostAddress sender;
 		quint16      senderPort;
@@ -44,17 +57,30 @@ void Babel::Network::UDPNetwork::readDatagram()
 				      &senderPort);
 		std::cout << "Message receive from: "
 			<< sender.toString().toStdString() << std::endl;
-		std::cout << buffer.toStdString() << std::endl;
+		std::cout << buffer.data() << std::endl;
+		QVector<float> data;
+		QDataStream    stream(buffer);
+		stream >> data;
+		std::vector<float> newvec(data.toStdVector());
+		sound.buffer = newvec;
+		sound.size   = sound.buffer.size();
+		_output->setSound(sound);
 	}
 }
 
-void Babel::Network::UDPNetwork::sendDatagram()
+void Babel::Network::UDPNetwork::sendDatagram(const DecodedSound &sound)
 {
+	QByteArray     buffer;
+	QVector<float> tmp = QVector<float>::fromStdVector(sound.buffer);
+	QDataStream    stream(&buffer, QIODevice::WriteOnly);
+	stream << tmp;
+	QVector<float> data;
+	QDataStream    nstream(buffer);
+	nstream >> data;
+	std::vector<float> newvec(data.toStdVector());
+	std::cout << "First: " << sound.buffer << std::endl;
+	std::cout << (newvec == sound.buffer) << std::endl;
 
-	QString    word("Hello world !");
-	QByteArray buffer;
-	buffer = word.toUtf8();
-	QHostAddress sender;
-	_socket->writeDatagram(buffer.data(), QHostAddress::LocalHost,
+	_socket->writeDatagram(buffer, QHostAddress::LocalHost,
 			       Babel::Network::port);
 }

@@ -8,17 +8,25 @@
 #include "Core.hpp"
 #include "includes/client/UI/Login.hpp"
 #include "includes/client/UI/Home.hpp"
+#include "includes/client/UI/Call.hpp"
 
-Core::Core(int ac, char **av) : _app(ac, av), _stackedWidget()
+Core::Core() : QWidget()
 {
-	_loginScreen = new Babel::UI::Login(_stackedWidget);
-	_homeScreen  = new Babel::UI::Home(_stackedWidget);
-	_stackedWidget.addWidget(_loginScreen);
-	_stackedWidget.addWidget(_homeScreen);
-	_stackedWidget.show();
+	_stackedWidget = new QStackedWidget();
+	_loginScreen   = new Babel::UI::Login(_stackedWidget);
+	_homeScreen    = new Babel::UI::Home(_stackedWidget);
+	_callScreen    = new Babel::UI::Call(_stackedWidget);
+	_stackedWidget->addWidget(_loginScreen);
+	_stackedWidget->addWidget(_homeScreen);
+	_stackedWidget->addWidget(_callScreen);
+	_stackedWidget->show();
+	QObject::connect(_stackedWidget, SIGNAL(currentChanged(int)), this,
+			 SLOT(checkForCall(int)));
 }
 
-void Core::run()
+void Core::checkForCall(int index)
 {
-	_app.exec();
+	if (index == _stackedWidget->indexOf(_callScreen)) {
+		reinterpret_cast<Babel::UI::Call *>(_callScreen)->makeCall("");
+	}
 }

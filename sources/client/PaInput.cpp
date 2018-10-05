@@ -1,11 +1,9 @@
 #include <stdexcept>
 #include <vector>
-#include <iostream>
 #include "DecodedSound.hpp"
-#include "SoundDeviceSettings.hpp"
 #include "PaInput.hpp"
 
-Babel::PaInput::PaInput()
+Babel::PaInput::PaInput(Babel::Network::UDPNetwork *udp) : _udp(udp)
 {
 	_error = Pa_Initialize();
 	if (_error != paNoError) {
@@ -57,7 +55,8 @@ int Babel::PaInput::RecordCallback(const void *inputBuffer, void *outputBuffer, 
 
 		}
 	}
-	thisRef->addSound(sound);
+	thisRef->_udp->sendDatagram(sound);
+	//thisRef->addSound(sound);
 	return paContinue;
 }
 

@@ -8,6 +8,8 @@
 #define CPP_BABEL_2018_UDPNETWORK_HPP
 
 #include <QtNetwork/QUdpSocket>
+#include "includes/client/PaOutput.hpp"
+#include "includes/client/DecodedSound.hpp"
 
 namespace Babel {
 
@@ -16,16 +18,17 @@ namespace Babel {
 		Q_OBJECT
 
 		public:
-			UDPNetwork();
+			explicit UDPNetwork(Babel::IAudio *out);
 
 		public slots:
-			void sendDatagram();
+			void sendDatagram(const DecodedSound &sound);
 
 		private slots:
 			void readDatagram();
 
 		private:
-			QUdpSocket *_socket;
+			Babel::IAudio *_output;
+			QUdpSocket    *_socket;
 		};
 	}
 }

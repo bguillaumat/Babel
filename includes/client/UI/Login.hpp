@@ -21,7 +21,7 @@ namespace Babel {
 		Q_OBJECT
 
 		public:
-			Login(QStackedWidget &stack);
+			Login(QStackedWidget *stack);
 
 		private slots:
 			void tryLogin();
@@ -37,7 +37,7 @@ namespace Babel {
 			QPalette       _background;
 			QLineEdit      *_id;
 			QLineEdit      *_pwd;
-			QStackedWidget &_stack;
+			QStackedWidget *_stack;
 		};
 	}
 }

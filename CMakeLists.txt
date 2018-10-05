@@ -40,18 +40,28 @@ SET(CLIENT_SRCS
         sources/client/PaInput.cpp
         sources/client/PaOutput.cpp
         sources/client/Core.cpp
+        includes/client/Core.hpp
         sources/client/UI/Login.cpp
         includes/client/UI/Login.hpp
+        includes/client/UI/Home.hpp
         sources/client/UI/Home.cpp
         sources/client/Network/UDPNetwork.cpp
         includes/client/Network/UDPNetwork.hpp
-        includes/client/Network/NetworkConfig.hpp sources/client/UI/Call.cpp includes/client/UI/Call.hpp sources/client/Network/TCPNetwork.cpp includes/client/Network/TCPNetwork.hpp)
+        includes/client/Network/NetworkConfig.hpp
+        sources/client/UI/Call.cpp
+        includes/client/UI/Call.hpp
+        sources/client/Network/TCPNetwork.cpp
+        includes/client/Network/TCPNetwork.hpp)
 
 add_executable(babel_client ${CLIENT_SRCS} ${COMMON_SRCS})
 
 target_include_directories(babel_client PRIVATE includes/client)
 
 target_link_libraries(babel_client ${CONAN_LIBS} Qt5::Widgets Qt5::Core Qt5::Gui Qt5::Network)
+
+add_custom_command(TARGET babel_client PRE_BUILD
+        COMMAND ${CMAKE_COMMAND} -E copy_directory
+        ${CMAKE_SOURCE_DIR}/media $<TARGET_FILE_DIR:babel_client>/media)
 #############################################
 
 SET(SERVER_SRCS

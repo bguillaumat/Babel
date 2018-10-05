@@ -17,15 +17,19 @@ namespace Babel {
 	namespace UI {
 
 		class Home : public QWidget {
+		Q_OBJECT
 		public:
-			Home(QStackedWidget &stack);
+			Home(QStackedWidget *stack);
+
+		private slots:
+			void makeCall();
 		private:
 			size_t         _width;
 			size_t         _height;
 			QPushButton    *_signin;
 			QHBoxLayout    *_buttonLayout;
 			QVBoxLayout    *_layout;
-			QStackedWidget &_stack;
+			QStackedWidget *_stack;
 		};
 	}
 }
