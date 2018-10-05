@@ -5,10 +5,7 @@
 ** Created by asianpw,
 */
 
-#include "Core.hpp"
-#include "includes/client/UI/Login.hpp"
-#include "includes/client/UI/Home.hpp"
-#include "includes/client/UI/Call.hpp"
+#include "includes/client/Core.hpp"
 
 Core::Core() : QWidget()
 {

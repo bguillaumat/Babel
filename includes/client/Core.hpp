@@ -9,6 +9,9 @@
 #define CPP_BABEL_2018_CORE_HPP
 
 #include <QtWidgets/QStackedWidget>
+#include "includes/client/UI/Login.hpp"
+#include "includes/client/UI/Home.hpp"
+#include "includes/client/UI/Call.hpp"
 
 class Core : public QWidget {
 Q_OBJECT

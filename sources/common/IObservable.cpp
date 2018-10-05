@@ -4,9 +4,8 @@
 ** File description:
 ** Created by asianpw,
 */
-#include <IObservable.hpp>
 
-#include "IObservable.hpp"
+#include "includes/common/IObservable.hpp"
 
 void IObservable::notify() const
 {

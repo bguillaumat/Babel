@@ -6,7 +6,7 @@
 */
 
 #include <iostream>
-#include "Factory.hpp"
+#include "includes/common/Factory.hpp"
 
 template <class Object,class Key>
 void	Factory<Object,Key>::Register(Key key, Object* obj)

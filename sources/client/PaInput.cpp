@@ -1,7 +1,7 @@
 #include <stdexcept>
 #include <vector>
-#include "DecodedSound.hpp"
-#include "PaInput.hpp"
+#include "includes/client/SoundDeviceSettings.hpp"
+#include "includes/client/PaInput.hpp"
 
 Babel::PaInput::PaInput(Babel::Network::UDPNetwork *udp) : _udp(udp)
 {

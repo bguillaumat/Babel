@@ -1,8 +1,7 @@
 #include <stdexcept>
 #include <iostream>
-#include "PrintVector.hpp"
-#include "SoundDeviceSettings.hpp"
-#include "PaOutput.hpp"
+#include "includes/client/SoundDeviceSettings.hpp"
+#include "includes/client/PaOutput.hpp"
 
 Babel::PaOutput::PaOutput()
 {

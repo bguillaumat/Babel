@@ -7,7 +7,7 @@
 
 #include <iostream>
 #include <QApplication>
-#include "Core.hpp"
+#include "includes/client/Core.hpp"
 
 int main(int ac, char *av[])
 {

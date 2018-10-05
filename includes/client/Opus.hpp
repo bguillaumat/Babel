@@ -1,7 +1,6 @@
 #ifndef BABEL_OPUS_H
 #define BABEL_OPUS_H
 
-#include <vector>
 #include <opus.h>
 #include "SoundDeviceSettings.hpp"
 #include "ICompressor.hpp"
