@@ -10,6 +10,7 @@ RUN apt-get update && apt-get -y install \
   git \
   tar \
   wget \
+  zsh \
   xz-utils \
   libjack-dev \
   libxcb1-dev \
