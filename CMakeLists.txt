@@ -84,11 +84,15 @@ endif (UNIX)
 if (MSVC)
     add_custom_command(TARGET babel_client POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CONAN_QT_ROOT}/plugins/platforms $<TARGET_FILE_DIR:babel_client>)
+            ${CONAN_BIN_DIRS_QT} $<TARGET_FILE_DIR:babel_client>)
 
     add_custom_command(TARGET babel_client POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CONAN_PORTAUDIO_ROOT} $<TARGET_FILE_DIR:babel_client>)
+            ${CONAN_QT_ROOT}/plugins/platforms $<TARGET_FILE_DIR:babel_client>/platforms)
+
+    add_custom_command(TARGET babel_client POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CONAN_PORTAUDIO_ROOT}/bin $<TARGET_FILE_DIR:babel_client>)
 
 endif(MSVC)
 
