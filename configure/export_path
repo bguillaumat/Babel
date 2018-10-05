@@ -1,0 +1,25 @@
+#!/usr/bin/env zsh
+
+
+if [ "$#" -ne 1 ]; then
+    echo "Illegal number of parameters"
+    exit 1
+fi
+
+if [ ! -z "$QT_QPA_PLATFORM_PLUGIN_PATH" ]; then
+    echo "QT_QPA_PLATFORM_PLUGIN_PATH is already set !"
+else
+    echo "export QT_QPA_PLATFORM_PLUGIN_PATH=$1" >> ~/.zshrc
+fi
+
+if [ ! -z "$QT_QPA_FONTDIR" ]; then
+    echo "QT_QPA_FONTDIR is already set !"
+else
+    echo "export QT_QPA_FONTDIR=~/.fonts" >> ~/.zshrc
+fi
+
+source ~/.zshrc
+
+
+
+

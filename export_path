@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-export QT_QPA_PLATFORM_PLUGIN_PATH=/home/j-f/.conan/data/Qt/5.11.2/bincrafters/stable/package/092e5212177a716c7f4082b9b05c5650f6e409d9/plugins
-export QT_QPA_FONTDIR=/home/j-f/.fonts

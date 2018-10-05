@@ -75,6 +75,23 @@ add_custom_command(TARGET babel_client PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/media $<TARGET_FILE_DIR:babel_client>/media)
 
+if (UNIX)
+    add_custom_command(TARGET babel_client
+            POST_BUILD
+            COMMAND ${CMAKE_SOURCE_DIR}/configure/export_path ${CONAN_QT_ROOT}/plugins)
+endif (UNIX)
+
+if (MSVC)
+    add_custom_command(TARGET babel_client POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CONAN_QT_ROOT}/plugins/platforms $<TARGET_FILE_DIR:babel_client>)
+
+    add_custom_command(TARGET babel_client POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CONAN_PORTAUDIO_ROOT} $<TARGET_FILE_DIR:babel_client>)
+
+endif(MSVC)
+
 #############################################
 
 SET(SERVER_SRCS
