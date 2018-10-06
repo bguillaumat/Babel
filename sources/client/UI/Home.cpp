@@ -11,9 +11,10 @@
 Babel::UI::Home::Home(QStackedWidget *stack)
 	: QWidget(), _width(300), _height(300), _stack(stack)
 {
+	QIcon tmp(QCoreApplication::applicationDirPath() + "/media/call.png");
+	_icon = tmp;
 	_signin = new QPushButton("Call me");
-	_signin->setIcon(QIcon(QCoreApplication::applicationDirPath() +
-				       "/media/call.png"));
+	_signin->setIcon(_icon);
 	_signin->setIconSize(QSize(30, 30));
 	_buttonLayout = new QHBoxLayout();
 	_layout       = new QVBoxLayout();

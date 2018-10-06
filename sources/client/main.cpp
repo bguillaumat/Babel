@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <QApplication>
+#include <includes/client/Network/TCPNetwork.hpp>
 #include "includes/client/Core.hpp"
 
 QByteArray readTextFile(const QString &file_path)
@@ -30,6 +31,7 @@ int main(int ac, char *av[])
 		QApplication _app(ac, av);
 		QString      styleSheet = readTextFile(QCoreApplication::applicationDirPath() + "/media/stylesheet.qss");
 		Core         core;
+		TCPNetwork	tcpNetwork;
 
 		_app.setStyleSheet(styleSheet);
 		_app.exec();

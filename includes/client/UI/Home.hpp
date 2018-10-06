@@ -31,6 +31,7 @@ namespace Babel {
 			QHBoxLayout    *_buttonLayout;
 			QVBoxLayout    *_layout;
 			QStackedWidget *_stack;
+			QIcon          _icon;
 		};
 	}
 }
