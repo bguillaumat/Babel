@@ -21,9 +21,12 @@
 #include <boost/chrono.hpp>
 #include <boost/array.hpp>
 #include <set>
+#include <vector>
+#include <iterator>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/bind.hpp>
+#include <boost/algorithm/string.hpp>
 #include "Client.hpp"
 
 using namespace boost::chrono;

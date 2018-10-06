@@ -39,8 +39,12 @@ void Server::startServer()
 void	Server::getClientData(int nb)
 {
 	char	buffers[sizeof(char) * nb];
-	std::string	data;
-	int	x = 0;
+	std::string			data;
+	int				x = 0;
+	int 				option;
+	bool				is_connected;
+	std::string			ip, username;
+	std::vector<std::string>	tokens;
 
 	if (nb >= 10)
 		nb += 1;
@@ -50,6 +54,33 @@ void	Server::getClientData(int nb)
 	while (buffers[x] && isprint(buffers[x])) {
 		data.push_back(buffers[x]);
 		x++;
+	}
+	boost::algorithm::split(tokens, data, boost::is_any_of("|"));
+	option = atoi(tokens[0].c_str());
+	username = tokens[1];
+	ip = tokens[2];
+	if (option == 0) {
+		is_connected = true;
+		Client	new_client(ip, username, is_connected);
+	//	_participants.insert(new_client);
+	}
+	else if (option == 1) {
+		is_connected = false;
+		Client	new_client(ip, username, is_connected);
+		std::cout << username << " leaved the server connection" <<std::endl;
+		/*for (auto participant: _participants) {
+			if (participant == new_client) {
+				_participants.erase(participant);
+				break;
+			}
+		}*/
+	}
+	else if (option == 2) {
+		std::string msg =" You are trying to call " + username + "\n";
+		boost::asio::async_write(socket_, boost::asio::buffer(msg),
+			boost::bind(&Server::handle, this,
+				boost::asio::placeholders::error)
+		);
 	}
 	std::cout << "Infos récupéré chez le client => [" << data << "]" <<std::endl;
 }
