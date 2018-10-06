@@ -7,7 +7,7 @@
 
 #include "Server.hpp"
 
-int	main(int ac, char *av[])
+/*int	main(int ac, char *av[])
 {
 	std::cout << system_clock::now() << std::endl;
 	#ifdef BOOST_CHRONO_HAS_CLOCK_STEADY
@@ -25,6 +25,22 @@ int	main(int ac, char *av[])
 	#ifdef BOOST_CHRONO_HAS_THREAD_CLOCK
 	std::cout << thread_clock::now() << std::endl;
 	#endif
+
+	return 0;
+}*/
+
+int	main(void)
+{
+	try
+	{
+		boost::asio::io_service io_service;
+		Tcp server(io_service, 8080);
+		io_service.run();
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 
 	return 0;
 }

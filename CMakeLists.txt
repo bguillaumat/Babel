@@ -10,6 +10,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 
+set(Boost_USE_STATIC_LIBS ON)
+
 if (MSVC)
     if (CMAKE_CXX_FLAGS MATCHES "/W[0-4]")
         string(REGEX REPLACE "/W[0-4]" "/W4" CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
@@ -25,6 +27,7 @@ conan_basic_setup()
 
 find_package(Threads REQUIRED)
 find_package(Qt5 COMPONENTS Gui Core Widgets Network REQUIRED)
+find_package(Boost)
 
 SET(COMMON_SRCS
         sources/common/Factory.cpp
@@ -108,6 +111,8 @@ SET(SERVER_SRCS
 add_executable(babel_server ${SERVER_SRCS} ${COMMON_SRCS})
 
 target_include_directories(babel_server PRIVATE includes/server)
+
+message("${CONAN_LIBS}")
 
 target_link_libraries(babel_server ${CONAN_LIBS} ${CMAKE_THREAD_LIBS_INIT})
 #############################################
