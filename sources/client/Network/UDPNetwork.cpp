@@ -56,9 +56,8 @@ void Babel::Network::UDPNetwork::readDatagram()
 		buffer.resize(_socket->pendingDatagramSize());
 		_socket->readDatagram(buffer.data(), buffer.size(), &sender,
 				      &senderPort);
-		std::cout << "Message receive from: "
-			<< sender.toString().toStdString() << std::endl;
-		std::cout << buffer.data() << std::endl;
+//		std::cout << "Message receive from: " << sender.toString().toStdString() << std::endl;
+//		std::cout << buffer.data() << std::endl;
 		QVector<float> data;
 		QDataStream    stream(buffer);
 		stream >> data;
@@ -76,9 +75,7 @@ void Babel::Network::UDPNetwork::sendDatagram(const DecodedSound &sound)
 	QDataStream    stream(&buffer, QIODevice::WriteOnly);
 	stream << tmp;
 //	std::cout << "First: " << sound.buffer << std::endl;
-
 //	QNetworkDatagram	datagram(buffer, QHostAddress::LocalHost, (qint16)Babel::Network::port);
-//
 //	datagram.setDestination(_host, Babel::Network::port);
 	_socket->writeDatagram(buffer, buffer.size(), _host, Babel::Network::port);
 }

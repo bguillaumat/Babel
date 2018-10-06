@@ -4,6 +4,7 @@
 ** File description:
 ** Created by asianpw,
 */
+
 #ifndef CPP_BABEL_2018_HOME_HPP
 #define CPP_BABEL_2018_HOME_HPP
 
@@ -19,7 +20,7 @@ namespace Babel {
 		class Home : public QWidget {
 		Q_OBJECT
 		public:
-			Home(QStackedWidget *stack);
+			explicit Home(QStackedWidget *stack);
 
 		private slots:
 			void makeCall();

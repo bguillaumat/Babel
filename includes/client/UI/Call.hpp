@@ -15,6 +15,9 @@
 #include <includes/client/IAudio.hpp>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
+#include <QtCore/QTimer>
+#include <QtCore/QElapsedTimer>
+#include <QtWidgets/QLabel>
 
 namespace Babel {
 	namespace UI {
@@ -25,6 +28,7 @@ namespace Babel {
 			void makeCall(const std::string &ip);
 
 		private slots:
+			void updateTimer();
 			void hangoutCall();
 
 		private:
@@ -32,10 +36,12 @@ namespace Babel {
 			QHBoxLayout                *_buttonLayout;
 			QVBoxLayout                *_layout;
 			QStackedWidget             *_stack;
+			QTimer                     *_time;
+			QLabel                     *_timeElapsed;
+			QElapsedTimer              *_timer;
 			Babel::Network::UDPNetwork *_udp;
 			Babel::IAudio              *_output;
 			Babel::IAudio              *_input;
-			Babel::DecodedSound        _sound;
 		};
 	}
 }
