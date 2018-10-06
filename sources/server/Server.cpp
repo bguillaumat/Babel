@@ -47,7 +47,7 @@ void	Server::getClientData(int nb)
 	boost::asio::read(socket_, boost::asio::buffer(buffers, nb));
 	if (!isalnum(buffers[0]))
 		x++;
-	while (buffers[x] && isalnum(buffers[x])) {
+	while (buffers[x] && isprint(buffers[x])) {
 		data.push_back(buffers[x]);
 		x++;
 	}
