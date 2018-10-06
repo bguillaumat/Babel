@@ -30,6 +30,15 @@ Babel::Network::UDPNetwork::UDPNetwork(Babel::IAudio *out) : _output(out)
 	if (!error) {
 		throw std::runtime_error("Cannot bind");
 	}
+
+	QTextStream qtin(stdin);
+	QString	ip;
+
+	qtin >> ip;
+
+	std::cout << "To:" << std::endl;
+	_host.setAddress(ip);
+
 	QObject::connect(_socket, SIGNAL(readyRead()), this,
 			 SLOT(readDatagram()));
 }
@@ -65,6 +74,5 @@ void Babel::Network::UDPNetwork::sendDatagram(const DecodedSound &sound)
 	QDataStream    stream(&buffer, QIODevice::WriteOnly);
 	stream << tmp;
 	std::cout << "First: " << sound.buffer << std::endl;
-	_socket->writeDatagram(buffer, QHostAddress::LocalHost,
-			       Babel::Network::port);
+	_socket->writeDatagram(buffer, _host, Babel::Network::port);
 }

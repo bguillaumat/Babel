@@ -29,6 +29,7 @@ namespace Babel {
 		private:
 			Babel::IAudio *_output;
 			QUdpSocket    *_socket;
+			QHostAddress  _host;
 		};
 	}
 }

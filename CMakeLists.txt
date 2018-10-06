@@ -74,12 +74,13 @@ target_link_libraries(babel_client ${CONAN_LIBS} Qt5::Widgets Qt5::Core Qt5::Gui
 add_custom_command(TARGET babel_client PRE_BUILD
         COMMAND ${CMAKE_COMMAND} -E copy_directory
         ${CMAKE_SOURCE_DIR}/media $<TARGET_FILE_DIR:babel_client>/media)
-
+#[[
 if (UNIX)
     add_custom_command(TARGET babel_client
             POST_BUILD
             COMMAND ${CMAKE_SOURCE_DIR}/configure/export_path ${CONAN_QT_ROOT}/plugins)
 endif (UNIX)
+]]
 
 if (MSVC)
     add_custom_command(TARGET babel_client POST_BUILD
