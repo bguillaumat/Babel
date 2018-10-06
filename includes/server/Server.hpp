@@ -42,11 +42,12 @@ private:
 
 
 
-	public:
+public:
 	typedef boost::shared_ptr<Server> pointer;
 	~Server(){};
 	static		pointer create(boost::asio::io_service& ios);
 	void		startServer();
+	void		getClientData(int);
 	tcp::socket&	getSocket();
 	std::string	getMessage();
 };

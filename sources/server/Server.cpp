@@ -18,16 +18,40 @@ void Server::handler(const boost::system::error_code &error, std::size_t bytes_t
 
 void Server::startServer()
 {
-	char	buffers[sizeof(char *)];
+	char	buffers[sizeof(char) * 2];
+	int	nb = 0;
 
-	message_ = "Welcome in our Server\n";
+	message_ = "200\n";
 	boost::asio::async_write(socket_, boost::asio::buffer(message_),
 		boost::bind(&Server::handle, this,
 			boost::asio::placeholders::error)
 	);
-	boost::asio::read(socket_, boost::asio::buffer(buffers));
+	//le nombre recu doit être double tout le temps
+	boost::asio::read(socket_, boost::asio::buffer(buffers, 2));
 
-	std::cout << "Infos récupéré chez le client => [" << buffers << "]" <<std::endl;
+	nb = atoi(buffers);
+	std::cout << nb << std::endl;
+	std::cout << "Infos récupéré chez le client => [" << nb << "]" <<std::endl;
+
+	getClientData(nb);
+}
+
+void	Server::getClientData(int nb)
+{
+	char	buffers[sizeof(char) * nb];
+	std::string	data;
+	int	x = 0;
+
+	if (nb >= 10)
+		nb += 1;
+	boost::asio::read(socket_, boost::asio::buffer(buffers, nb));
+	if (!isalnum(buffers[0]))
+		x++;
+	while (buffers[x] && isalnum(buffers[x])) {
+		data.push_back(buffers[x]);
+		x++;
+	}
+	std::cout << "Infos récupéré chez le client => [" << data << "]" <<std::endl;
 }
 
 void Server::handle(const boost::system::error_code &error)
