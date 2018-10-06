@@ -9,12 +9,29 @@
 #include <QApplication>
 #include "includes/client/Core.hpp"
 
+QByteArray readTextFile(const QString &file_path)
+{
+	QFile      input_file(file_path);
+	QByteArray input_data;
+
+	if (input_file.open(QIODevice::Text | QIODevice::Unbuffered |
+				    QIODevice::ReadOnly)) {
+		input_data = input_file.readAll();
+		input_file.close();
+		return input_data;
+	} else {
+		return QByteArray();
+	}
+}
+
 int main(int ac, char *av[])
 {
 	try {
 		QApplication _app(ac, av);
+		QString      styleSheet = readTextFile(QCoreApplication::applicationDirPath() + "/media/stylesheet.qss");
 		Core         core;
 
+		_app.setStyleSheet(styleSheet);
 		_app.exec();
 	} catch (const std::runtime_error &runtimeError) {
 		std::cerr << "A runtime error occur:" << std::endl << "\t"
