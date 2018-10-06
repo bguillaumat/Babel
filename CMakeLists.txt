@@ -115,4 +115,13 @@ target_include_directories(babel_server PRIVATE includes/server)
 
 target_link_libraries(babel_server ${CONAN_LIBS} ${CMAKE_THREAD_LIBS_INIT})
 
+if (MSVC)
+
+    add_custom_command(TARGET babel_server POST_BUILD
+            COMMAND ${CMAKE_COMMAND} -E copy_directory
+            ${CONAN_BIN_DIRS_BOOST} $<TARGET_FILE_DIR:babel_server>)
+
+endif(MSVC)
+
+
 #############################################
