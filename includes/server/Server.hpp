@@ -51,13 +51,13 @@ public:
 
 // Creation af an tcp server
 class Tcp {
-	private:
+private:
 	tcp::acceptor		accept_;
 	void			begin_accept();
 	void			check_accept(Server::pointer new_connection,
 		const boost::system::error_code& error);
 
-	public:
+public:
 	~Tcp(){};
 	Tcp(boost::asio::io_service& io_service, int port);
 };
