@@ -7,7 +7,7 @@
 
 #include "../../includes/server/Server.hpp"
 
-Server::Server(boost::asio::io_service &io_service) : socket_(io_service)
+Server::Server(boost::asio::io_service &io_service) : Client("", "", false), socket_(io_service)
 {
 }
 
@@ -18,14 +18,14 @@ void Server::startServer()
 		boost::bind(&Server::handle, this,
 			boost::asio::placeholders::error)
 	);
+	while (1) {
+	}
 }
 
 void Server::handle(const boost::system::error_code &error)
 {
 	if (!error)
-	{
-		// others actions
-	}
+	{}
 }
 
 Server::pointer Server::create(boost::asio::io_service &ios)
@@ -38,8 +38,6 @@ tcp::socket & Server::getSocket()
 	return socket_;
 }
 
-/// server tcp creation ///
-
 Tcp::Tcp(boost::asio::io_service &io_service, int port)
 	: accept_(io_service, tcp::endpoint(tcp::v4(), port))
 {
@@ -51,15 +49,15 @@ void Tcp::begin_accept()
 	Server::pointer new_connection = Server::create(accept_.get_io_service());
 
 	accept_.async_accept(new_connection->getSocket(),
-		boost::bind(&Tcp::handle_accept, this, new_connection,
+		boost::bind(&Tcp::check_accept, this, new_connection,
 			boost::asio::placeholders::error));
 }
 
-void Tcp::handle_accept(Server::pointer new_connection, const boost::system::error_code& error)
+void Tcp::check_accept(Server::pointer new_connection, const boost::system::error_code& error)
 {
 	if (!error)
 	{
-		std::cout << "A client is connected!" << std::endl;
+		std::cout<<"A new client is connected!"<<std::endl;
 		new_connection->startServer();
 		begin_accept();
 	}
