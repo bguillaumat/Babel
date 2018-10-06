@@ -19,14 +19,15 @@
 #include <iostream>
 #include <boost/asio.hpp>
 #include <boost/chrono.hpp>
+#include <set>
 #include "Client.hpp"
 
 using boost::asio::ip::tcp;
 using namespace boost::chrono;
 
-class Server : public Clients {
+class Server : public Client {
 private:
-	Clients	_clients;
+	std::set<Client>	_participants;
 
 public:
 	~Server();

@@ -5,8 +5,8 @@
 ** server.hpp
 */
 
-#ifndef CPP_BABEL_2018_SERVER_HPP
-#define CPP_BABEL_2018_SERVER_HPP
+#ifndef CPP_BABEL_2018_CLIENT_HPP
+#define CPP_BABEL_2018_CLIENT_HPP
 
 #include <iostream>
 #include <set>
@@ -29,13 +29,4 @@ public:
 	void			client_disconnected();
 };
 
-class Clients {
-private:
-	std::set<Client>	_participants;
-
-public:
-	virtual ~Clients();
-
-};
-
-#endif //CPP_BABEL_2018_SERVER_HPP
+#endif //CPP_BABEL_2018_CLIENT_HPP
