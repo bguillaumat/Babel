@@ -36,10 +36,13 @@ private:
 	tcp::socket		socket_;
 	std::string		message_;
 	Server(boost::asio::io_service& io_service);
-	void handle(const boost::system::error_code& error);
+	void		handle(const boost::system::error_code& error);
+	void handler(const boost::system::error_code& error,
+		std::size_t bytes_transferred);
 
 
-public:
+
+	public:
 	typedef boost::shared_ptr<Server> pointer;
 	~Server(){};
 	static		pointer create(boost::asio::io_service& ios);

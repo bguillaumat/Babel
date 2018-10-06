@@ -11,16 +11,23 @@ Server::Server(boost::asio::io_service &io_service) : Client("", "", false), soc
 {
 }
 
+void Server::handler(const boost::system::error_code &error, std::size_t bytes_transferred)
+{
+	if (!error && !bytes_transferred){}
+}
+
 void Server::startServer()
 {
+	char	buffers[sizeof(char *)];
+
 	message_ = "Welcome in our Server\n";
-	std::string	infos;
-	getline(std::cin, infos);
-	std::cout<<infos<<std::endl;
 	boost::asio::async_write(socket_, boost::asio::buffer(message_),
 		boost::bind(&Server::handle, this,
 			boost::asio::placeholders::error)
 	);
+	boost::asio::read(socket_, boost::asio::buffer(buffers));
+
+	std::cout << "Infos récupéré chez le client => [" << buffers << "]" <<std::endl;
 }
 
 void Server::handle(const boost::system::error_code &error)
@@ -62,8 +69,5 @@ void Tcp::check_accept(Server::pointer new_connection, const boost::system::erro
 		std::cout<<"A new client is connected!"<<std::endl;
 		new_connection->startServer();
 		begin_accept();
-		while (1) {
-			break;
-		}
 	}
 }
