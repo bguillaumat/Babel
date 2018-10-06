@@ -24,9 +24,9 @@
 using boost::asio::ip::tcp;
 using namespace boost::chrono;
 
-class Server {
+class Server : public Clients {
 private:
-	//clients class??
+	Clients	_clients;
 
 public:
 	~Server();
