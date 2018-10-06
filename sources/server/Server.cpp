@@ -21,13 +21,13 @@ void Server::startServer()
 		boost::bind(&Server::handle, this,
 			boost::asio::placeholders::error)
 	);
-
 }
 
 void Server::handle(const boost::system::error_code &error)
 {
 	if (!error)
-	{}
+	{
+	}
 }
 
 Server::pointer Server::create(boost::asio::io_service &ios)
@@ -62,5 +62,8 @@ void Tcp::check_accept(Server::pointer new_connection, const boost::system::erro
 		std::cout<<"A new client is connected!"<<std::endl;
 		new_connection->startServer();
 		begin_accept();
+		while (1) {
+			break;
+		}
 	}
 }
