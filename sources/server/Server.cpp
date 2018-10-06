@@ -14,12 +14,14 @@ Server::Server(boost::asio::io_service &io_service) : Client("", "", false), soc
 void Server::startServer()
 {
 	message_ = "Welcome in our Server\n";
+	std::string	infos;
+	getline(std::cin, infos);
+	std::cout<<infos<<std::endl;
 	boost::asio::async_write(socket_, boost::asio::buffer(message_),
 		boost::bind(&Server::handle, this,
 			boost::asio::placeholders::error)
 	);
-	while (1) {
-	}
+
 }
 
 void Server::handle(const boost::system::error_code &error)
