@@ -11,7 +11,6 @@ Client::Client(std::string ip, std::string username, bool state)
 	: _ip(ip), _username(username), _state(state)
 {
 	_state = false;
-
 }
 
 Client::~Client()

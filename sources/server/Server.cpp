@@ -7,7 +7,8 @@
 
 #include "../../includes/server/Server.hpp"
 
-Server::Server(boost::asio::io_service &io_service) : Client("", "", false), socket_(io_service)
+//Server::Server(boost::asio::io_service &io_service) : Client("", "", false), socket_(io_service)
+Server::Server(boost::asio::io_service &io_service) : socket_(io_service)
 {
 }
 
@@ -26,12 +27,18 @@ void Server::startServer()
 		boost::bind(&Server::handle, this,
 			boost::asio::placeholders::error)
 	);
-	//le nombre recu doit être double tout le temps
+
 	boost::asio::read(socket_, boost::asio::buffer(buffers, 2));
 
 	nb = atoi(buffers);
 	std::cout << nb << std::endl;
 	std::cout << "Infos récupéré chez le client => [" << nb << "]" <<std::endl;
+
+	message_ = "200\n";
+	boost::asio::async_write(socket_, boost::asio::buffer(message_),
+		boost::bind(&Server::handle, this,
+			boost::asio::placeholders::error)
+	);
 
 	getClientData(nb);
 }
@@ -51,23 +58,30 @@ void	Server::getClientData(int nb)
 	boost::asio::read(socket_, boost::asio::buffer(buffers, nb));
 	if (!isalnum(buffers[0]))
 		x++;
-	while (buffers[x] && isprint(buffers[x])) {
+	if (nb >= 10)
+		nb -= 1;
+	while (buffers[x] && isprint(buffers[x]) && nb) {
 		data.push_back(buffers[x]);
+		nb--;
 		x++;
 	}
+
+	//std::string client_ip = socket_.remote_endpoint().address().to_string();
 	boost::algorithm::split(tokens, data, boost::is_any_of("|"));
 	option = atoi(tokens[0].c_str());
 	username = tokens[1];
-	ip = tokens[2];
+	//ip = tokens[2];
+	ip = socket_.remote_endpoint().address().to_string();
 	if (option == 0) {
 		is_connected = true;
-		Client	new_client(ip, username, is_connected);
-	//	_participants.insert(new_client);
+		//Client	new_client(ip, username, is_connected);
+		//_participants.push_front(new_client);
+		//_psocket.push_front(socket);
 	}
 	else if (option == 1) {
 		is_connected = false;
-		Client	new_client(ip, username, is_connected);
-		std::cout << username << " leaved the server connection" <<std::endl;
+		//Client	new_client(ip, username, is_connected);
+		std::cout << username << " leaved the server" <<std::endl;
 		/*for (auto participant: _participants) {
 			if (participant == new_client) {
 				_participants.erase(participant);
@@ -76,7 +90,15 @@ void	Server::getClientData(int nb)
 		}*/
 	}
 	else if (option == 2) {
-		std::string msg =" You are trying to call " + username + "\n";
+		//std::string msg="ip du contact dans le set";
+		std::string msg ="You are trying to call " + username + "\n";
+		boost::asio::async_write(socket_, boost::asio::buffer(msg),
+			boost::bind(&Server::handle, this,
+				boost::asio::placeholders::error)
+		);
+	}
+	else if (option == 3) {
+		std::string msg ="Refreshing online contacts\n";
 		boost::asio::async_write(socket_, boost::asio::buffer(msg),
 			boost::bind(&Server::handle, this,
 				boost::asio::placeholders::error)
@@ -103,7 +125,7 @@ tcp::socket & Server::getSocket()
 }
 
 Tcp::Tcp(boost::asio::io_service &io_service, int port)
-	: accept_(io_service, tcp::endpoint(tcp::v4(), port))
+	: Client("", "", false), accept_(io_service, tcp::endpoint(tcp::v4(), port))
 {
 	begin_accept();
 }
@@ -122,7 +144,7 @@ void Tcp::check_accept(Server::pointer new_connection, const boost::system::erro
 	if (!error)
 	{
 		std::cout<<"A new client is connected!"<<std::endl;
-		new_connection->startServer();
+		new_connection->startServer(/*_participants, _psockets*/);
 		begin_accept();
 	}
 }
