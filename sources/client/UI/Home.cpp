@@ -114,6 +114,7 @@ void Babel::UI::Home::itemDoubleClicked(QListWidgetItem *listWidgetItem)
 
 void Babel::UI::Home::logout()
 {
+	_tcpNetwork    = new TCPNetwork(QString::fromStdString("127.0.0.1"), std::stoi("8080"));
 	_tcpNetwork->writeData("1|" + _username->text().toStdString());
 	_stack->setCurrentIndex(0);
 }
