@@ -50,6 +50,7 @@ void	Server::getClientData(int nb, std::list<Client>& client_list)
 	int				x = 0;
 	int 				option;
 	bool				is_connected;
+	bool				find = false;
 	std::string			ip, username;
 	std::vector<std::string>	tokens;
 	std::list<Client>::iterator	it1;
@@ -77,8 +78,6 @@ void	Server::getClientData(int nb, std::list<Client>& client_list)
 		is_connected = true;
 		Client	new_client(ip, username, is_connected);
 		client_list.push_back(new_client);
-		// add socket tab filled //
-		/* Ici les expression pour remplir la liste de sockets*/
 	}
 	else if (option == 1) {
 		is_connected = false;
@@ -105,6 +104,24 @@ void	Server::getClientData(int nb, std::list<Client>& client_list)
 			boost::bind(&Server::handle, this,
 				boost::asio::placeholders::error)
 		);
+		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
+			if ((*it1).getUsername() == username) {
+				//print
+				find = true;
+				std::string msg ="500|" + (*it1).getIp() +"\n";
+				boost::asio::async_write(socket_, boost::asio::buffer(msg),
+					boost::bind(&Server::handle, this,
+						boost::asio::placeholders::error)
+				);
+			}
+		}
+		if (!find) {
+			std::string msg = "404\n";
+			boost::asio::async_write(socket_,
+				boost::asio::buffer(msg),
+				boost::bind(&Server::handle, this,
+					boost::asio::placeholders::error));
+		}
 	}
 	else if (option == 3) {
 		std::string msg ="Refreshing online contacts\n";
@@ -112,7 +129,18 @@ void	Server::getClientData(int nb, std::list<Client>& client_list)
 			boost::bind(&Server::handle, this,
 				boost::asio::placeholders::error)
 		);
+		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
+			if (it1 != client_list.begin())
+				msg += "|";
+			msg += (*it1).getIp() + ":" + (*it1).getUsername();
+		}
+		msg += "\n";
+		boost::asio::async_write(socket_, boost::asio::buffer(msg),
+			boost::bind(&Server::handle, this,
+				boost::asio::placeholders::error)
+		);
 	}
+
 	std::cout << "Infos récupéré chez le client => [" << data << "]" <<std::endl;
 }
 

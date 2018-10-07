@@ -12,6 +12,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QFormLayout>
+#include "includes/client/Network/TCPNetwork.hpp"
 
 namespace Babel {
 
@@ -21,7 +22,8 @@ namespace Babel {
 		Q_OBJECT
 
 		public:
-			explicit Login(QStackedWidget *stack);
+			explicit Login(QStackedWidget *stack, TCPNetwork *_tcpNetwork);
+			QString &getUsername();
 
 		private slots:
 			void tryLogin();
@@ -29,6 +31,8 @@ namespace Babel {
 		private:
 			size_t         _width;
 			size_t         _height;
+			QString        _username;
+			TCPNetwork     *_tcpNetwork;
 			QPushButton    *_signin;
 			QHBoxLayout    *_buttonLayout;
 			QFormLayout    *_form;
