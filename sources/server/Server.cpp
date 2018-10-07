@@ -51,6 +51,7 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp
 	int				x = 0;
 	int 				option;
 	bool				is_connected;
+	bool				find = false;
 	std::string			ip, username;
 	std::vector<std::string>	tokens;
 	std::list<Client>::iterator	it1;
@@ -110,12 +111,20 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp
 		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
 			if ((*it1).getUsername() == username) {
 				//print
+				find = true;
 				std::string msg ="500|" + (*it1).getIp() +"\n";
 				boost::asio::async_write(socket_, boost::asio::buffer(msg),
 					boost::bind(&Server::handle, this,
 						boost::asio::placeholders::error)
 				);
 			}
+		}
+		if (!find) {
+			std::string msg = "404\n";
+			boost::asio::async_write(socket_,
+				boost::asio::buffer(msg),
+				boost::bind(&Server::handle, this,
+					boost::asio::placeholders::error));
 		}
 	}
 	else if (option == 3) {
