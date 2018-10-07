@@ -21,17 +21,30 @@ namespace Babel {
 		Q_OBJECT
 		public:
 			explicit Home(QStackedWidget *stack);
+			const std::string &getIp() const;
+			const std::string &getName() const;
+			void setUsername(QString &username);
 
 		private slots:
 			void makeCall();
+			void makeTestCall();
+			void changeButtonName(QString const &currentText);
+			void itemDoubleClicked(QListWidgetItem *);
+
 		private:
 			size_t         _width;
 			size_t         _height;
-			QPushButton    *_signin;
+			QFont          _font;
+			QLabel         *_username;
+			QListWidget    *_listWidget;
+			QPushButton    *_call;
+			QPushButton    *_test;
 			QHBoxLayout    *_buttonLayout;
 			QVBoxLayout    *_layout;
 			QStackedWidget *_stack;
 			QIcon          _icon;
+			std::string    _ip;
+			std::string    _name;
 		};
 	}
 }

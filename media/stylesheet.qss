@@ -384,6 +384,7 @@ QStatusBar {
 
 QLabel {
 	color: #FFFFFF;		/* Text at the bottom right corner of the screen */
+	font-size: 120;
 }
 
 QToolButton {	/* I don't like how the items depress */

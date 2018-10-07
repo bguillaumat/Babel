@@ -38,6 +38,13 @@ void Babel::UI::Login::tryLogin()
 {
 	if (_id->text().isEmpty())
 		_id->setPlaceholderText("Please enter an id");
-	else
+	else {
+		_username = _id->text();
 		_stack->setCurrentIndex(1);
+	}
+}
+
+QString &Babel::UI::Login::getUsername()
+{
+	return _username;
 }

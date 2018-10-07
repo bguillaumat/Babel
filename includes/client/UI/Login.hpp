@@ -22,6 +22,7 @@ namespace Babel {
 
 		public:
 			explicit Login(QStackedWidget *stack);
+			QString &getUsername();
 
 		private slots:
 			void tryLogin();
@@ -29,6 +30,7 @@ namespace Babel {
 		private:
 			size_t         _width;
 			size_t         _height;
+			QString        _username;
 			QPushButton    *_signin;
 			QHBoxLayout    *_buttonLayout;
 			QFormLayout    *_form;

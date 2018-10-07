@@ -15,29 +15,32 @@
 
 Babel::UI::Call::Call(QStackedWidget *stack) : _stack(stack)
 {
-	_timeElapsed  = new QLabel();
-	_time         = new QTimer();
-	_timer        = new QElapsedTimer();
+	_timeElapsed  = new QLabel;
+	_name         = new QLabel;
+	_time         = new QTimer;
+	_timer        = new QElapsedTimer;
 	_hangout      = new QPushButton("Hangout");
-	_buttonLayout = new QHBoxLayout();
-	_layout       = new QVBoxLayout();
+	_buttonLayout = new QHBoxLayout;
+	_layout       = new QVBoxLayout;
 	_hangout->setIcon(QIcon(QCoreApplication::applicationDirPath() + "/media/call_end.png"));
 	_hangout->setIconSize(QSize(30, 30));
+	_name->setAlignment(Qt::AlignCenter);
 	_buttonLayout->addWidget(_hangout);
 	_buttonLayout->addWidget(_timeElapsed);
+	_layout->addWidget(_name);
 	_layout->addLayout(_buttonLayout);
 	setLayout(_layout);
 	_output = new Babel::PaOutput();
 	_udp    = new Babel::Network::UDPNetwork(_output);
 	_input  = new Babel::PaInput(_udp);
-	QObject::connect(_hangout, SIGNAL(clicked()), this,
-			 SLOT(hangoutCall()));
+	QObject::connect(_hangout, SIGNAL(clicked()), this, SLOT(hangoutCall()));
 	QObject::connect(_time, SIGNAL(timeout()), this, SLOT(updateTimer()));
 }
 
-void Babel::UI::Call::makeCall(const std::string &ip)
+void Babel::UI::Call::makeCall(const std::string &ip, const std::string &name)
 {
 	_udp->setHost(ip);
+	_name->setText(QString::fromStdString("To: " + name));
 	_timeElapsed->setText("Time elapsed: 00:00:00");
 	_time->start(1000);
 	_timer->start();
