@@ -27,12 +27,15 @@ QByteArray readTextFile(const QString &file_path)
 
 int main(int ac, char *av[])
 {
-	Settings     settings(av, ac);
+	Settings settings(av, ac);
 	try {
 		QApplication _app(ac, av);
-		QString      styleSheet = readTextFile(QCoreApplication::applicationDirPath() + "/media/stylesheet.qss");
-		Core         core(settings);
+		QFontDatabase::addApplicationFont(":/media/Pacifico.ttf");
+		QFont   font       = QFont("Pacifico", 10, 2);
+		QString styleSheet = readTextFile(QCoreApplication::applicationDirPath() + "/media/stylesheet.qss");
+		Core    core(settings);
 
+		_app.setFont(font);
 		_app.setStyleSheet(styleSheet);
 		_app.exec();
 	} catch (const std::invalid_argument &invalidArgument) {

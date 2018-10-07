@@ -25,7 +25,7 @@ namespace Babel {
 		Q_OBJECT
 		public:
 			explicit Call(QStackedWidget *stack);
-			void makeCall(const std::string &ip);
+			void makeCall(const std::string &ip, const std::string &name);
 
 		private slots:
 			void updateTimer();
@@ -37,6 +37,7 @@ namespace Babel {
 			QVBoxLayout                *_layout;
 			QStackedWidget             *_stack;
 			QTimer                     *_time;
+			QLabel                     *_name;
 			QLabel                     *_timeElapsed;
 			QElapsedTimer              *_timer;
 			Babel::Network::UDPNetwork *_udp;
