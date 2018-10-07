@@ -26,7 +26,7 @@ using boost::asio::ip::tcp;
 // class to make a connection between users
 class Server : public std::enable_shared_from_this<Server>, public Client {
 private:
-	std::set<Client>	_participants;
+	std::list<Client>	_participants;
 	tcp::socket		socket_;
 	std::string		message_;
 	Server(boost::asio::io_service& io_service);

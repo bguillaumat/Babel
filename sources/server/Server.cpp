@@ -74,7 +74,9 @@ void	Server::getClientData(int nb)
 	if (option == 0) {
 		is_connected = true;
 		Client	new_client(ip, username, is_connected);
-	//	_participants.insert(new_client);
+		_participants.push_front(new_client);
+
+	//	_participants.insert(new_client); pour un set
 	}
 	else if (option == 1) {
 		is_connected = false;
@@ -88,6 +90,7 @@ void	Server::getClientData(int nb)
 		}*/
 	}
 	else if (option == 2) {
+		//std::string msg="ip du contact dans le set";
 		std::string msg ="You are trying to call " + username + "\n";
 		boost::asio::async_write(socket_, boost::asio::buffer(msg),
 			boost::bind(&Server::handle, this,
