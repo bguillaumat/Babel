@@ -139,6 +139,10 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<std
 		);
 	}
 
+	else if (option == 5) {
+		//if msg parse ip|msg ip == current ip dire ce qu'il y'a
+	}
+
 	std::cout << "Infos récupéré chez le client => [" << data << "]" <<std::endl;
 }
 
