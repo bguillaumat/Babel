@@ -25,8 +25,6 @@ public:
 	const std::string	getUsername();
 	void			setIp(std::string);
 	void			setUsername(std::string);
-	void			client_connected();
-	void			client_disconnected();
 };
 
 #endif //CPP_BABEL_2018_CLIENT_HPP

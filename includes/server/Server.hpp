@@ -4,6 +4,7 @@
 ** File description:
 ** Created by j-f,
 */
+
 #ifndef CPP_BABEL_2018_SERVER_HPP
 #define CPP_BABEL_2018_SERVER_HPP
 
@@ -26,12 +27,12 @@ using boost::asio::ip::tcp;
 // class to make a connection between users
 class Server : public std::enable_shared_from_this<Server>{
 private:
-	//std::list<Client>	_participants;
+	std::list<Client>	_participants;
 	tcp::socket		socket_;
 	std::string		message_;
 	Server(boost::asio::io_service& io_service);
 	void		handle(const boost::system::error_code& error);
-	void handler(const boost::system::error_code& error,
+	void		handler(const boost::system::error_code& error,
 		std::size_t bytes_transferred);
 
 
@@ -40,8 +41,8 @@ public:
 	typedef boost::shared_ptr<Server> pointer;
 	~Server(){};
 	static		pointer create(boost::asio::io_service& ios);
-	void		startServer();
-	void		getClientData(int);
+	void		startServer(std::list<Client>& client_list, std::list<tcp::socket>& socket_list);
+	void		getClientData(int, std::list<Client>& , std::list<tcp::socket>&);
 	tcp::socket&	getSocket();
 	std::string	getMessage();
 };
