@@ -25,7 +25,6 @@ conan_basic_setup()
 
 find_package(Threads REQUIRED)
 find_package(Qt5 COMPONENTS Gui Core Widgets Network REQUIRED)
-find_package(Boost)
 
 SET(COMMON_SRCS
         sources/common/Factory.cpp
@@ -116,7 +115,7 @@ if (MSVC)
 
     add_custom_command(TARGET babel_server POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory
-            ${CONAN_BIN_DIRS_BOOST} $<TARGET_FILE_DIR:babel_server>)
+            ${CONAN_BIN_DIRS_BOOST_ASIO} $<TARGET_FILE_DIR:babel_server>)
 
 endif(MSVC)
 
