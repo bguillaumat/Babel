@@ -34,13 +34,14 @@ void Server::startServer(std::list<Client>& client_list, std::list<tcp::socket>&
 	std::cout << nb << std::endl;
 	std::cout << "Infos récupéré chez le client => [" << nb << "]" <<std::endl;
 
-	message_ = "200\n";
-	boost::asio::async_write(socket_, boost::asio::buffer(message_),
-		boost::bind(&Server::handle, this,
-			boost::asio::placeholders::error)
-	);
+	if (nb != 0) {
+		message_ = "200\n";
+		boost::asio::async_write(socket_, boost::asio::buffer(message_),
+			boost::bind(&Server::handle, this,
+				boost::asio::placeholders::error));
 
-	getClientData(nb, client_list, socket_list);
+		getClientData(nb, client_list, socket_list);
+	}
 }
 
 void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp::socket>& socket_list)
@@ -52,6 +53,8 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp
 	bool				is_connected;
 	std::string			ip, username;
 	std::vector<std::string>	tokens;
+	std::list<Client>::iterator	it1;
+	std::list<tcp::socket>::iterator	it2;
 
 	if (nb >= 10)
 		nb += 1;
@@ -75,18 +78,27 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp
 		is_connected = true;
 		Client	new_client(ip, username, is_connected);
 		client_list.push_back(new_client);
+		//socket_list.push_back(&socket_);
 		// add socket tab filled //
 		/* Ici les expression pour remplir la liste de sockets*/
 	}
 	else if (option == 1) {
 		is_connected = false;
 		Client	current_client(ip, username, is_connected);
-		/*for (std::list<Client> it = client_list.begin(); it != client_list.end(); it++) {
-			if (it._ip = current_client.getIp() && it._username == username) {
-				client_list.erase(current_client);
+		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
+			if ((*it1).getIp() == current_client.getIp() && (*it1).getUsername() == current_client.getUsername()) {
+				std::cout << username << " leaved the server" <<std::endl;
+				it1 = client_list.erase(it1);
 			}
-		}*/
-		std::cout << username << " leaved the server" <<std::endl;
+		}
+		for (it2 = socket_list.begin(); it2 != socket_list.end(); it2++) {
+			if ((*it2).remote_endpoint().address().to_string() == socket_.remote_endpoint().address().to_string()) {
+				std::cout << username << " leaved the server" <<std::endl;
+				it2 = socket_list.erase(it2);
+			}
+		}
+		//check du vidage de list
+		std::cout << client_list.size() << " " << socket_list.size() << std::endl;
 	}
 	else if (option == 2) {
 		//std::string msg="ip du contact dans le set";
