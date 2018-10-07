@@ -66,17 +66,17 @@ void	Server::getClientData(int nb)
 		x++;
 	}
 
-	std::string client_ip = socket_.remote_endpoint().address().to_string();
-
+	//std::string client_ip = socket_.remote_endpoint().address().to_string();
 	boost::algorithm::split(tokens, data, boost::is_any_of("|"));
 	option = atoi(tokens[0].c_str());
 	username = tokens[1];
-	ip = tokens[2];
+	//ip = tokens[2];
+	ip = socket_.remote_endpoint().address().to_string();
 	if (option == 0) {
 		is_connected = true;
 		//Client	new_client(ip, username, is_connected);
 		//_participants.push_front(new_client);
-	//	_participants.insert(new_client); pour un set
+		//_psocket.push_front(socket);
 	}
 	else if (option == 1) {
 		is_connected = false;
@@ -144,7 +144,7 @@ void Tcp::check_accept(Server::pointer new_connection, const boost::system::erro
 	if (!error)
 	{
 		std::cout<<"A new client is connected!"<<std::endl;
-		new_connection->startServer();
+		new_connection->startServer(/*_participants, _psockets*/);
 		begin_accept();
 	}
 }
