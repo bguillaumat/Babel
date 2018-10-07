@@ -65,6 +65,8 @@ void	Server::getClientData(int nb)
 		x++;
 	}
 
+	std::string client_ip = socket_.remote_endpoint().address().to_string();
+
 	boost::algorithm::split(tokens, data, boost::is_any_of("|"));
 	option = atoi(tokens[0].c_str());
 	username = tokens[1];
