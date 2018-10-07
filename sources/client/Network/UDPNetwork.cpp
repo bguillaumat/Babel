@@ -31,18 +31,8 @@ Babel::Network::UDPNetwork::UDPNetwork(Babel::IAudio *out) : _output(out)
 	if (!error) {
 		throw std::runtime_error("Cannot bind");
 	}
-
-	QTextStream qtin(stdin);
-	QString	ip;
-
-	qtin >> ip;
-
-	std::cout << "To:" << std::endl;
-	_host.setAddress(ip);
-
 	QObject::connect(_socket, SIGNAL(readyRead()), this,
 			 SLOT(readDatagram()));
-	_socket->connectToHost(_host, Babel::Network::port);
 }
 
 void Babel::Network::UDPNetwork::readDatagram()
@@ -53,7 +43,7 @@ void Babel::Network::UDPNetwork::readDatagram()
 		QHostAddress sender;
 		quint16      senderPort;
 
-		buffer.resize(_socket->pendingDatagramSize());
+		buffer.resize((int)_socket->pendingDatagramSize());
 		_socket->readDatagram(buffer.data(), buffer.size(), &sender,
 				      &senderPort);
 //		std::cout << "Message receive from: " << sender.toString().toStdString() << std::endl;
@@ -61,9 +51,8 @@ void Babel::Network::UDPNetwork::readDatagram()
 		QVector<float> data;
 		QDataStream    stream(buffer);
 		stream >> data;
-		std::vector<float> newvec(data.toStdVector());
-		sound.buffer = newvec;
-		sound.size   = sound.buffer.size();
+		sound.buffer = std::vector<float>(data.toStdVector());
+		sound.size   = (int)sound.buffer.size();
 		_output->setSound(sound);
 	}
 }
@@ -78,4 +67,10 @@ void Babel::Network::UDPNetwork::sendDatagram(const DecodedSound &sound)
 //	QNetworkDatagram	datagram(buffer, QHostAddress::LocalHost, (qint16)Babel::Network::port);
 //	datagram.setDestination(_host, Babel::Network::port);
 	_socket->writeDatagram(buffer, buffer.size(), _host, Babel::Network::port);
+}
+
+void Babel::Network::UDPNetwork::setHost(const std::string &host)
+{
+	QString addr = QString::fromStdString(host);
+	_host.setAddress(addr);
 }

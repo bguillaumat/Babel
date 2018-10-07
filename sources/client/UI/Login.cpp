@@ -20,9 +20,6 @@ Babel::UI::Login::Login(QStackedWidget *stack)
 	_buttonLayout = new QHBoxLayout();
 	setFixedSize(_width, _height);
 	setWindowTitle("Skipe");
-	_background.setColor(QPalette::Background, Qt::cyan);
-	setAutoFillBackground(true);
-	setPalette(_background);
 	_form->addRow("Username:", _id);
 	_form->setSpacing(20);
 	_form->setFormAlignment(Qt::AlignCenter);

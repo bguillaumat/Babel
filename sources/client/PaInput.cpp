@@ -1,5 +1,6 @@
 #include <stdexcept>
 #include <vector>
+#include <iostream>
 #include "includes/client/SoundDeviceSettings.hpp"
 #include "includes/client/PaInput.hpp"
 
@@ -15,9 +16,13 @@ Babel::PaInput::PaInput(Babel::Network::UDPNetwork *udp) : _udp(udp)
 	}
 	_parameters.channelCount              = SoundDeviceSetting::channels;
 	_parameters.sampleFormat              = paFloat32;
-	_parameters.suggestedLatency          = Pa_GetDeviceInfo(_parameters.device)->defaultLowInputLatency;
+	_parameters.suggestedLatency          = Pa_GetDeviceInfo(
+		_parameters.device)->defaultHighInputLatency;
 	_parameters.hostApiSpecificStreamInfo = nullptr;
-	_error = Pa_OpenStream(&_stream, &_parameters, nullptr, (double)SoundDeviceSetting::sampleRate, SoundDeviceSetting::framePerBuffer, paClipOff, RecordCallback, this);
+	_error = Pa_OpenStream(&_stream, &_parameters, nullptr,
+			       (double)SoundDeviceSetting::sampleRate,
+			       SoundDeviceSetting::framePerBuffer, paClipOff,
+			       RecordCallback, this);
 	if (_error != paNoError) {
 		throw std::runtime_error("Unable to open stream.");
 	}
@@ -25,6 +30,7 @@ Babel::PaInput::PaInput(Babel::Network::UDPNetwork *udp) : _udp(udp)
 
 Babel::PaInput::~PaInput()
 {
+	stop();
 	Pa_CloseStream(_stream);
 	Pa_Terminate();
 }
@@ -40,23 +46,15 @@ int Babel::PaInput::RecordCallback(const void *inputBuffer, void *outputBuffer, 
 	(void)timeInfo;
 	(void)statusFlags;
 	(void)framesPerBuffer;
-	for (size_t count = 0; count < framesPerBuffer; count++) {
-		if (inputBuffer == nullptr) {
-			sound.buffer.push_back(SoundDeviceSetting::SAMPLE_SILENCE);
-			if (SoundDeviceSetting::channels == 2) {
-				sound.buffer.push_back(
-					SoundDeviceSetting::SAMPLE_SILENCE);
-			}
-		} else {
+	if (inputBuffer == nullptr) {
+		sound.buffer = std::vector<float>(SoundDeviceSetting::framePerBuffer * SoundDeviceSetting::channels, SoundDeviceSetting::SAMPLE_SILENCE);
+	} else {
+		for (size_t count = 0; count < framesPerBuffer * SoundDeviceSetting::channels; count++) {
 			sound.buffer.push_back(*input++);
-			if (SoundDeviceSetting::channels == 2) {
-				sound.buffer.push_back(*input++);
-			}
-
 		}
 	}
+	sound.size = (int)sound.buffer.size();
 	thisRef->_udp->sendDatagram(sound);
-	//thisRef->addSound(sound);
 	return paContinue;
 }
 
@@ -76,26 +74,10 @@ Babel::DecodedSound Babel::PaInput::getSound() const
 {
 	DecodedSound sound;
 
-	if (!_sounds.empty()) {
-		_lock.lock();
-		sound = std::move(_sounds.front());
-		_sounds.erase(_sounds.begin());
-		_lock.unlock();
-	} else {
-		sound.buffer = std::vector<float>(
-			SoundDeviceSetting::framePerBuffer,
-			SoundDeviceSetting::SAMPLE_SILENCE);
-		sound.size   = SoundDeviceSetting::framePerBuffer;
-	}
-
+	sound.buffer = std::vector<float>(SoundDeviceSetting::framePerBuffer,
+					  SoundDeviceSetting::SAMPLE_SILENCE);
+	sound.size   = (int)sound.buffer.size();
 	return sound;
-}
-
-void Babel::PaInput::addSound(DecodedSound &sound)
-{
-	_lock.lock();
-	_sounds.emplace_back(sound);
-	_lock.unlock();
 }
 
 void Babel::PaInput::setSound(const DecodedSound &sound)

@@ -53,7 +53,8 @@ SET(CLIENT_INC
         includes/client/UI/Call.hpp
         includes/client/Network/UDPNetwork.hpp
         includes/client/Network/NetworkConfig.hpp
-        includes/client/Network/TCPNetwork.hpp)
+        includes/client/Network/TCPNetwork.hpp
+        includes/client/Settings.hpp)
 
 SET(CLIENT_SRCS
         sources/client/main.cpp
@@ -65,7 +66,8 @@ SET(CLIENT_SRCS
         sources/client/UI/Home.cpp
         sources/client/Network/UDPNetwork.cpp
         sources/client/UI/Call.cpp
-        sources/client/Network/TCPNetwork.cpp)
+        sources/client/Network/TCPNetwork.cpp
+        sources/client/Settings.cpp)
 
 add_executable(babel_client ${CLIENT_SRCS} ${COMMON_SRCS} ${CLIENT_INC})
 

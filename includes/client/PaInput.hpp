@@ -12,7 +12,7 @@ namespace Babel {
 	//This class take sound from the default micro on the device
 	class PaInput : public IAudio {
 	public:
-		PaInput(Babel::Network::UDPNetwork *udp);
+		explicit PaInput(Babel::Network::UDPNetwork *udp);
 		~PaInput() override;
 		//Callback record
 		static int RecordCallback(const void *inputBuffer, void *outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo *timeInfo, PaStreamCallbackFlags statusFlags, void *userData);
@@ -20,16 +20,12 @@ namespace Babel {
 		bool stop() override;
 		DecodedSound getSound() const override;
 		void setSound(const DecodedSound &sound) override;
-	private:
-		void addSound(DecodedSound &);
 
 	private:
 		//Contain current input stream
 		PaStream                          *_stream = nullptr;
 		PaStreamParameters                _parameters;
 		PaError                           _error;
-		mutable std::vector<DecodedSound> _sounds;
-		mutable std::mutex                _lock;
 		Babel::Network::UDPNetwork        *_udp;
 	};
 } // namespace Babel
