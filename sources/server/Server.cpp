@@ -5,7 +5,7 @@
 ** server.cpp
 */
 
-#include "../../includes/server/Server.hpp"
+#include "Server.hpp"
 
 //Server::Server(boost::asio::io_service &io_service) : Client("", "", false), socket_(io_service)
 Server::Server(boost::asio::io_service &io_service) : socket_(io_service)
@@ -17,33 +17,34 @@ void Server::handler(const boost::system::error_code &error, std::size_t bytes_t
 	if (!error && !bytes_transferred){}
 }
 
-void Server::startServer()
+void Server::startServer(std::list<Client>& client_list, std::list<tcp::socket>& socket_list)
 {
 	char	buffers[sizeof(char) * 2];
 	int	nb = 0;
+
 
 	message_ = "200\n";
 	boost::asio::async_write(socket_, boost::asio::buffer(message_),
 		boost::bind(&Server::handle, this,
 			boost::asio::placeholders::error)
 	);
-
 	boost::asio::read(socket_, boost::asio::buffer(buffers, 2));
 
 	nb = atoi(buffers);
 	std::cout << nb << std::endl;
 	std::cout << "Infos récupéré chez le client => [" << nb << "]" <<std::endl;
 
-	message_ = "200\n";
-	boost::asio::async_write(socket_, boost::asio::buffer(message_),
-		boost::bind(&Server::handle, this,
-			boost::asio::placeholders::error)
-	);
+	if (nb != 0) {
+		message_ = "200\n";
+		boost::asio::async_write(socket_, boost::asio::buffer(message_),
+			boost::bind(&Server::handle, this,
+				boost::asio::placeholders::error));
 
-	getClientData(nb);
+		getClientData(nb, client_list, socket_list);
+	}
 }
 
-void	Server::getClientData(int nb)
+void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp::socket>& socket_list)
 {
 	char	buffers[sizeof(char) * nb];
 	std::string			data;
@@ -52,6 +53,8 @@ void	Server::getClientData(int nb)
 	bool				is_connected;
 	std::string			ip, username;
 	std::vector<std::string>	tokens;
+	std::list<Client>::iterator	it1;
+	std::list<tcp::socket>::iterator	it2;
 
 	if (nb >= 10)
 		nb += 1;
@@ -70,24 +73,32 @@ void	Server::getClientData(int nb)
 	boost::algorithm::split(tokens, data, boost::is_any_of("|"));
 	option = atoi(tokens[0].c_str());
 	username = tokens[1];
-	//ip = tokens[2];
 	ip = socket_.remote_endpoint().address().to_string();
 	if (option == 0) {
 		is_connected = true;
-		//Client	new_client(ip, username, is_connected);
-		//_participants.push_front(new_client);
-		//_psocket.push_front(socket);
+		Client	new_client(ip, username, is_connected);
+		client_list.push_back(new_client);
+		//socket_list.push_back(&socket_);
+		// add socket tab filled //
+		/* Ici les expression pour remplir la liste de sockets*/
 	}
 	else if (option == 1) {
 		is_connected = false;
-		//Client	new_client(ip, username, is_connected);
-		std::cout << username << " leaved the server" <<std::endl;
-		/*for (auto participant: _participants) {
-			if (participant == new_client) {
-				_participants.erase(participant);
-				break;
+		Client	current_client(ip, username, is_connected);
+		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
+			if ((*it1).getIp() == current_client.getIp() && (*it1).getUsername() == current_client.getUsername()) {
+				std::cout << username << " leaved the server" <<std::endl;
+				it1 = client_list.erase(it1);
 			}
-		}*/
+		}
+		for (it2 = socket_list.begin(); it2 != socket_list.end(); it2++) {
+			if ((*it2).remote_endpoint().address().to_string() == socket_.remote_endpoint().address().to_string()) {
+				std::cout << username << " leaved the server" <<std::endl;
+				it2 = socket_list.erase(it2);
+			}
+		}
+		//check du vidage de list
+		std::cout << client_list.size() << " " << socket_list.size() << std::endl;
 	}
 	else if (option == 2) {
 		//std::string msg="ip du contact dans le set";
@@ -144,7 +155,7 @@ void Tcp::check_accept(Server::pointer new_connection, const boost::system::erro
 	if (!error)
 	{
 		std::cout<<"A new client is connected!"<<std::endl;
-		new_connection->startServer(/*_participants, _psockets*/);
+		new_connection->startServer(_participants, _psockets);
 		begin_accept();
 	}
 }
