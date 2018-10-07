@@ -19,7 +19,7 @@ TCPNetwork::TCPNetwork(const QString &ip, int port, int timeToWait) : _ip(ip),
 	connect(_socket, SIGNAL(disconnected()), this, SLOT(disconnected()));
 	_socket->connectToHost(_ip, _port);
 	if (!_socket->waitForConnected(_timeToWait)) {
-		qDebug() << "Error: " << _socket->errorString();
+		throw std::runtime_error("The server doesn't respond !");
 	}
 }
 
@@ -63,10 +63,8 @@ void TCPNetwork::disconnected()
 	qDebug() << "disconnected...";
 }
 
-void TCPNetwork::writeData(const char *msg)
+void TCPNetwork::writeData(const std::string &msg)
 {
-	if (_socket->isWritable()) {
-		return;
-	}
-	_socket->write(msg);
+	_socket->write(std::to_string(msg.size()).append("\n").data());
+	_socket->write(msg.data());
 }

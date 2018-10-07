@@ -15,13 +15,13 @@ class TCPNetwork : public QObject {
 Q_OBJECT
 public:
 	TCPNetwork(const QString &ip, int port, int timeToWait = 5000);
+	void writeData(const std::string &msg);
 
 private slots:
 	void displayError(QAbstractSocket::SocketError socketError);
 	void readData();
 	void connected();
 	void disconnected();
-	void writeData(const char *msg);
 
 private:
 	const QString &_ip;

@@ -7,8 +7,11 @@
 
 #include "includes/client/Core.hpp"
 
-Core::Core() : QWidget()
+Core::Core(Settings const &settings) : QWidget()
 {
+	if (!settings.isContinue())
+		throw std::invalid_argument("");
+	_tcpNetwork    = new TCPNetwork(QString::fromStdString(settings.getIp()), std::stoi(settings.getPort()));
 	_stackedWidget = new QStackedWidget();
 	_loginScreen   = new Babel::UI::Login(_stackedWidget);
 	_homeScreen    = new Babel::UI::Home(_stackedWidget);
@@ -24,6 +27,7 @@ Core::Core() : QWidget()
 void Core::checkForCall(int index)
 {
 	if (index == _stackedWidget->indexOf(_callScreen)) {
-		reinterpret_cast<Babel::UI::Call *>(_callScreen)->makeCall("127.0.0.1");
+		reinterpret_cast<Babel::UI::Call *>(_callScreen)->makeCall(
+			"127.0.0.1");
 	}
 }

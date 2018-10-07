@@ -7,8 +7,8 @@
 
 #include <iostream>
 #include <QApplication>
-#include <includes/client/Network/TCPNetwork.hpp>
 #include "includes/client/Core.hpp"
+#include "includes/client/Settings.hpp"
 
 QByteArray readTextFile(const QString &file_path)
 {
@@ -27,14 +27,16 @@ QByteArray readTextFile(const QString &file_path)
 
 int main(int ac, char *av[])
 {
+	Settings     settings(av, ac);
 	try {
 		QApplication _app(ac, av);
 		QString      styleSheet = readTextFile(QCoreApplication::applicationDirPath() + "/media/stylesheet.qss");
-		Core         core;
-		TCPNetwork	tcpNetwork("127.0.0.1", 8080);
+		Core         core(settings);
 
 		_app.setStyleSheet(styleSheet);
 		_app.exec();
+	} catch (const std::invalid_argument &invalidArgument) {
+		return settings.getReturnCode();
 	} catch (const std::runtime_error &runtimeError) {
 		std::cerr << "A runtime error occur:" << std::endl << "\t"
 			<< runtimeError.what() << std::endl;
