@@ -24,9 +24,9 @@ using namespace boost::chrono;
 using boost::asio::ip::tcp;
 
 // class to make a connection between users
-class Server : public std::enable_shared_from_this<Server>, public Client {
+class Server : public std::enable_shared_from_this<Server>{
 private:
-	std::list<Client>	_participants;
+	//std::list<Client>	_participants;
 	tcp::socket		socket_;
 	std::string		message_;
 	Server(boost::asio::io_service& io_service);
@@ -48,8 +48,10 @@ public:
 
 
 // Creation af an tcp server
-class Tcp {
+class Tcp : public Client{
 private:
+	std::list<Client>	_participants;
+	std::list<tcp::socket>	_psockets;
 	tcp::acceptor		accept_;
 	void			begin_accept();
 	void			check_accept(Server::pointer new_connection,

@@ -7,7 +7,8 @@
 
 #include "../../includes/server/Server.hpp"
 
-Server::Server(boost::asio::io_service &io_service) : Client("", "", false), socket_(io_service)
+//Server::Server(boost::asio::io_service &io_service) : Client("", "", false), socket_(io_service)
+Server::Server(boost::asio::io_service &io_service) : socket_(io_service)
 {
 }
 
@@ -73,14 +74,13 @@ void	Server::getClientData(int nb)
 	ip = tokens[2];
 	if (option == 0) {
 		is_connected = true;
-		Client	new_client(ip, username, is_connected);
-		_participants.push_front(new_client);
-
+		//Client	new_client(ip, username, is_connected);
+		//_participants.push_front(new_client);
 	//	_participants.insert(new_client); pour un set
 	}
 	else if (option == 1) {
 		is_connected = false;
-		Client	new_client(ip, username, is_connected);
+		//Client	new_client(ip, username, is_connected);
 		std::cout << username << " leaved the server" <<std::endl;
 		/*for (auto participant: _participants) {
 			if (participant == new_client) {
@@ -125,7 +125,7 @@ tcp::socket & Server::getSocket()
 }
 
 Tcp::Tcp(boost::asio::io_service &io_service, int port)
-	: accept_(io_service, tcp::endpoint(tcp::v4(), port))
+	: Client("", "", false), accept_(io_service, tcp::endpoint(tcp::v4(), port))
 {
 	begin_accept();
 }
