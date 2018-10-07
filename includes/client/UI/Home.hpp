@@ -20,7 +20,7 @@ namespace Babel {
 		class Home : public QWidget {
 		Q_OBJECT
 		public:
-			explicit Home(QStackedWidget *stack);
+			explicit Home(QStackedWidget *stack, TCPNetwork *tcpNetwork);
 			const std::string &getIp() const;
 			const std::string &getName() const;
 			void setUsername(QString &username);
@@ -30,15 +30,19 @@ namespace Babel {
 			void makeTestCall();
 			void changeButtonName(QString const &currentText);
 			void itemDoubleClicked(QListWidgetItem *);
+			void logout();
 
 		private:
+			TCPNetwork     *_tcpNetwork;
 			size_t         _width;
 			size_t         _height;
 			QFont          _font;
 			QLabel         *_username;
 			QListWidget    *_listWidget;
+			QPushButton    *_logout;
 			QPushButton    *_call;
 			QPushButton    *_test;
+			QHBoxLayout    *_header;
 			QHBoxLayout    *_buttonLayout;
 			QVBoxLayout    *_layout;
 			QStackedWidget *_stack;

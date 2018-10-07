@@ -13,8 +13,8 @@ Core::Core(Settings const &settings) : QWidget()
 		throw std::invalid_argument("");
 	_tcpNetwork    = new TCPNetwork(QString::fromStdString(settings.getIp()), std::stoi(settings.getPort()));
 	_stackedWidget = new QStackedWidget();
-	_loginScreen   = new Babel::UI::Login(_stackedWidget);
-	_homeScreen    = new Babel::UI::Home(_stackedWidget);
+	_loginScreen   = new Babel::UI::Login(_stackedWidget, _tcpNetwork);
+	_homeScreen    = new Babel::UI::Home(_stackedWidget, _tcpNetwork);
 	_callScreen    = new Babel::UI::Call(_stackedWidget);
 	_stackedWidget->addWidget(_loginScreen);
 	_stackedWidget->addWidget(_homeScreen);

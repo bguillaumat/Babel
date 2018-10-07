@@ -10,8 +10,8 @@
 
 #include "includes/client/UI/Login.hpp"
 
-Babel::UI::Login::Login(QStackedWidget *stack)
-	: QWidget(), _width(500), _height(400), _stack(stack)
+Babel::UI::Login::Login(QStackedWidget *stack, TCPNetwork *tcpNetwork)
+	: QWidget(), _width(500), _height(400), _tcpNetwork(tcpNetwork), _stack(stack)
 {
 	_signin       = new QPushButton("Sign In");
 	_id           = new QLineEdit();
@@ -38,7 +38,7 @@ void Babel::UI::Login::tryLogin()
 {
 	if (_id->text().isEmpty())
 		_id->setPlaceholderText("Please enter an id");
-	else {
+	else if (_tcpNetwork->writeData("0|" + _id->text().toStdString())) {
 		_username = _id->text();
 		_stack->setCurrentIndex(1);
 	}

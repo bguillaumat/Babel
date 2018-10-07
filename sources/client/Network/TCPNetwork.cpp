@@ -63,8 +63,12 @@ void TCPNetwork::disconnected()
 	qDebug() << "disconnected...";
 }
 
-void TCPNetwork::writeData(const std::string &msg)
+bool TCPNetwork::writeData(const std::string &msg)
 {
+	if (_socket->state() != QTcpSocket::ConnectedState) {
+		return false;
+	}
 	_socket->write(std::to_string(msg.size()).append("\n").data());
-	_socket->write(msg.data());
+	_socket->write((msg + "\n").data());
+	return true;
 }
