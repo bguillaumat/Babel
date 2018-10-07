@@ -94,6 +94,13 @@ void	Server::getClientData(int nb)
 				boost::asio::placeholders::error)
 		);
 	}
+	else if (option == 3) {
+		std::string msg ="Refreshing online contacts\n";
+		boost::asio::async_write(socket_, boost::asio::buffer(msg),
+			boost::bind(&Server::handle, this,
+				boost::asio::placeholders::error)
+		);
+	}
 	std::cout << "Infos récupéré chez le client => [" << data << "]" <<std::endl;
 }
 
