@@ -17,7 +17,7 @@ void Server::handler(const boost::system::error_code &error, std::size_t bytes_t
 	if (!error && !bytes_transferred){}
 }
 
-void Server::startServer(std::list<Client>& client_list, std::list<tcp::socket>& socket_list)
+void Server::startServer(std::list<Client>& client_list)
 {
 	char	buffers[sizeof(char) * 2];
 	int	nb = 0;
@@ -40,11 +40,11 @@ void Server::startServer(std::list<Client>& client_list, std::list<tcp::socket>&
 			boost::bind(&Server::handle, this,
 				boost::asio::placeholders::error));
 
-		getClientData(nb, client_list, socket_list);
+		getClientData(nb, client_list);
 	}
 }
 
-void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp::socket>& socket_list)
+void	Server::getClientData(int nb, std::list<Client>& client_list)
 {
 	char	buffers[sizeof(char) * nb];
 	std::string			data;
@@ -55,7 +55,6 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp
 	std::string			ip, username;
 	std::vector<std::string>	tokens;
 	std::list<Client>::iterator	it1;
-	std::list<tcp::socket>::iterator	it2;
 
 	if (nb >= 10)
 		nb += 1;
@@ -92,14 +91,7 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp
 				it1 = client_list.erase(it1);
 			}
 		}
-		for (it2 = socket_list.begin(); it2 != socket_list.end(); it2++) {
-			if ((*it2).remote_endpoint().address().to_string() == socket_.remote_endpoint().address().to_string()) {
-				std::cout << username << " leaved the server" <<std::endl;
-				it2 = socket_list.erase(it2);
-			}
-		}
 		//check du vidage de list
-		std::cout << client_list.size() << " " << socket_list.size() << std::endl;
 	}
 	else if (option == 2) {
 		//std::string msg="ip du contact dans le set";
@@ -185,7 +177,7 @@ void Tcp::check_accept(Server::pointer new_connection, const boost::system::erro
 	if (!error)
 	{
 		std::cout<<"A new client is connected!"<<std::endl;
-		new_connection->startServer(_participants, _psockets);
+		new_connection->startServer(_participants);
 		begin_accept();
 	}
 }

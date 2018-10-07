@@ -40,8 +40,8 @@ public:
 	typedef boost::shared_ptr<Server> pointer;
 	~Server(){};
 	static		pointer create(boost::asio::io_service& ios);
-	void		startServer(std::list<Client>& client_list, std::list<tcp::socket>& socket_list);
-	void		getClientData(int, std::list<Client>& , std::list<tcp::socket>&);
+	void		startServer(std::list<Client>& client_list);
+	void		getClientData(int, std::list<Client>&);
 	tcp::socket&	getSocket();
 	std::string	getMessage();
 };
@@ -51,7 +51,6 @@ public:
 class Tcp : public Client{
 private:
 	std::list<Client>	_participants;
-	std::list<tcp::socket>	_psockets;
 	tcp::acceptor		accept_;
 	void			begin_accept();
 	void			check_accept(Server::pointer new_connection,
