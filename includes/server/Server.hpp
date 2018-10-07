@@ -50,6 +50,7 @@ public:
 // Creation af an tcp server
 class Tcp : public Client{
 private:
+	tcp::socket		*tab_socket;
 	std::list<Client>	_participants;
 	std::list<std::string>	_msg;
 	tcp::acceptor		accept_;

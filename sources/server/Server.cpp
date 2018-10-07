@@ -7,7 +7,6 @@
 
 #include "Server.hpp"
 
-//Server::Server(boost::asio::io_service &io_service) : Client("", "", false), socket_(io_service)
 Server::Server(boost::asio::io_service &io_service) : socket_(io_service)
 {
 }
@@ -78,20 +77,27 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<std
 		is_connected = true;
 		Client	new_client(ip, username, is_connected);
 		client_list.push_back(new_client);
-		//socket_list.push_back(socket_(io_service));
-		// add socket tab filled //
-		/* Ici les expression pour remplir la liste de sockets*/
 	}
 	else if (option == 1) {
 		is_connected = false;
 		Client	current_client(ip, username, is_connected);
 		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
-			if ((*it1).getIp() == current_client.getIp() && (*it1).getUsername() == current_client.getUsername()) {
-				std::cout << username << " leaved the server" <<std::endl;
+			if ((*it1).getIp() == current_client.getIp() &&
+				(*it1).getUsername() ==
+					current_client.getUsername()) {
+				std::cout << username << " leaved the server"
+					<< std::endl;
 				it1 = client_list.erase(it1);
 			}
 		}
+		/*for (it2 = socket_list.begin(); it2 != socket_list.end(); it2++) {
+			if ((*it2).remote_endpoint().address().to_string() == socket_.remote_endpoint().address().to_string()) {
+				std::cout << username << " leaved the server" <<std::endl;
+				it2 = socket_list.erase(it2);
+			}
+		}*/
 		//check du vidage de list
+		std::cout << client_list.size() << std::endl;
 	}
 	else if (option == 2) {
 		//std::string msg="ip du contact dans le set";
