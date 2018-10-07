@@ -64,7 +64,8 @@ void	Server::getClientData(int nb)
 		nb--;
 		x++;
 	}
-		boost::algorithm::split(tokens, data, boost::is_any_of("|"));
+
+	boost::algorithm::split(tokens, data, boost::is_any_of("|"));
 	option = atoi(tokens[0].c_str());
 	username = tokens[1];
 	ip = tokens[2];
