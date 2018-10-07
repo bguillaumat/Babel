@@ -124,7 +124,13 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp
 			boost::bind(&Server::handle, this,
 				boost::asio::placeholders::error)
 		);
+		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
+			if (it1 != client_list.begin())
+				msg += "|";
+			msg += (*it1).getIp() + ":"  + (*it1).getUsername();
+		}
 	}
+
 	std::cout << "Infos récupéré chez le client => [" << data << "]" <<std::endl;
 }
 

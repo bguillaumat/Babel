@@ -104,8 +104,7 @@ endif(MSVC)
 SET(SERVER_SRCS
         sources/server/main.cpp
         sources/server/Server.cpp
-        sources/server/Client.cpp
-        sources/server/server_commands.cpp)
+        sources/server/Client.cpp)
 
 add_executable(babel_server ${SERVER_SRCS} ${COMMON_SRCS})
 
