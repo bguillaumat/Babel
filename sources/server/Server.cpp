@@ -33,6 +33,12 @@ void Server::startServer()
 	std::cout << nb << std::endl;
 	std::cout << "Infos récupéré chez le client => [" << nb << "]" <<std::endl;
 
+	message_ = "200\n";
+	boost::asio::async_write(socket_, boost::asio::buffer(message_),
+		boost::bind(&Server::handle, this,
+			boost::asio::placeholders::error)
+	);
+
 	getClientData(nb);
 }
 
@@ -51,11 +57,14 @@ void	Server::getClientData(int nb)
 	boost::asio::read(socket_, boost::asio::buffer(buffers, nb));
 	if (!isalnum(buffers[0]))
 		x++;
-	while (buffers[x] && isprint(buffers[x])) {
+	if (nb >= 10)
+		nb -= 1;
+	while (buffers[x] && isprint(buffers[x]) && nb) {
 		data.push_back(buffers[x]);
+		nb--;
 		x++;
 	}
-	boost::algorithm::split(tokens, data, boost::is_any_of("|"));
+		boost::algorithm::split(tokens, data, boost::is_any_of("|"));
 	option = atoi(tokens[0].c_str());
 	username = tokens[1];
 	ip = tokens[2];
@@ -67,7 +76,7 @@ void	Server::getClientData(int nb)
 	else if (option == 1) {
 		is_connected = false;
 		Client	new_client(ip, username, is_connected);
-		std::cout << username << " leaved the server connection" <<std::endl;
+		std::cout << username << " leaved the server" <<std::endl;
 		/*for (auto participant: _participants) {
 			if (participant == new_client) {
 				_participants.erase(participant);
@@ -76,7 +85,7 @@ void	Server::getClientData(int nb)
 		}*/
 	}
 	else if (option == 2) {
-		std::string msg =" You are trying to call " + username + "\n";
+		std::string msg ="You are trying to call " + username + "\n";
 		boost::asio::async_write(socket_, boost::asio::buffer(msg),
 			boost::bind(&Server::handle, this,
 				boost::asio::placeholders::error)
