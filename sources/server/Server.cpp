@@ -78,7 +78,7 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp
 		is_connected = true;
 		Client	new_client(ip, username, is_connected);
 		client_list.push_back(new_client);
-		//socket_list.push_back(&socket_);
+		//socket_list.push_back(socket_(io_service));
 		// add socket tab filled //
 		/* Ici les expression pour remplir la liste de sockets*/
 	}
@@ -107,6 +107,16 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp
 			boost::bind(&Server::handle, this,
 				boost::asio::placeholders::error)
 		);
+		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
+			if ((*it1).getUsername() == username) {
+				//print
+				std::string msg ="500|" + (*it1).getIp() +"\n";
+				boost::asio::async_write(socket_, boost::asio::buffer(msg),
+					boost::bind(&Server::handle, this,
+						boost::asio::placeholders::error)
+				);
+			}
+		}
 	}
 	else if (option == 3) {
 		std::string msg ="Refreshing online contacts\n";
