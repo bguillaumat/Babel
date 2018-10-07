@@ -31,7 +31,7 @@ int main(int ac, char *av[])
 		QApplication _app(ac, av);
 		QString      styleSheet = readTextFile(QCoreApplication::applicationDirPath() + "/media/stylesheet.qss");
 		Core         core;
-		TCPNetwork	tcpNetwork;
+		TCPNetwork	tcpNetwork("127.0.0.1", 8080);
 
 		_app.setStyleSheet(styleSheet);
 		_app.exec();

@@ -24,6 +24,6 @@ Core::Core() : QWidget()
 void Core::checkForCall(int index)
 {
 	if (index == _stackedWidget->indexOf(_callScreen)) {
-		reinterpret_cast<Babel::UI::Call *>(_callScreen)->makeCall("");
+		reinterpret_cast<Babel::UI::Call *>(_callScreen)->makeCall("127.0.0.1");
 	}
 }

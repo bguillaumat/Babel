@@ -19,6 +19,7 @@ namespace Babel {
 
 		public:
 			explicit UDPNetwork(Babel::IAudio *out);
+			void setHost(const std::string &host);
 
 		public slots:
 			void sendDatagram(const DecodedSound &sound);

@@ -37,6 +37,7 @@ Babel::UI::Call::Call(QStackedWidget *stack) : _stack(stack)
 
 void Babel::UI::Call::makeCall(const std::string &ip)
 {
+	_udp->setHost(ip);
 	_timeElapsed->setText("Time elapsed: 00:00:00");
 	_time->start(1000);
 	_timer->start();

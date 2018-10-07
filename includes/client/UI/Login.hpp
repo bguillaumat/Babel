@@ -33,7 +33,6 @@ namespace Babel {
 			QHBoxLayout    *_buttonLayout;
 			QFormLayout    *_form;
 			QVBoxLayout    *_layout;
-			QPalette       _background;
 			QLineEdit      *_id;
 			QStackedWidget *_stack;
 		};

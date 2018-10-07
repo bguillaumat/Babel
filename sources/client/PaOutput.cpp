@@ -15,7 +15,7 @@ Babel::PaOutput::PaOutput()
 	}
 	_parameters.channelCount              = SoundDeviceSetting::channels;
 	_parameters.sampleFormat              = paFloat32;
-	_parameters.suggestedLatency          = Pa_GetDeviceInfo(_parameters.device)->defaultLowInputLatency;
+	_parameters.suggestedLatency          = Pa_GetDeviceInfo(_parameters.device)->defaultHighOutputLatency;
 	_parameters.hostApiSpecificStreamInfo = nullptr;
 	_error = Pa_OpenStream(&_stream, nullptr, &_parameters,
 			       (double)(SoundDeviceSetting::sampleRate),
@@ -43,27 +43,15 @@ int Babel::PaOutput::PlayCallback(const void *inputBuffer, void *outputBuffer, u
 	(void)statusFlags;
 	(void)inputBuffer;
 	if (thisRef->_sounds.empty()) {
-		for (size_t count = 0; count < framesPerBuffer; count++) {
-			*output++ = SoundDeviceSetting::SAMPLE_SILENCE;
-			if (SoundDeviceSetting::channels == 2) {
-				*output++ = SoundDeviceSetting::SAMPLE_SILENCE;
-			}
+		for (size_t count = 0; count < framesPerBuffer * SoundDeviceSetting::channels; count++) {
+			output[count] = SoundDeviceSetting::SAMPLE_SILENCE;
 		}
 	} else {
 		thisRef->_lock.lock();
 		sound = thisRef->_sounds.front();
-		for (size_t count = 0; count < framesPerBuffer; count++) {
-			if (sound.buffer.empty()) {
-				break;
-			}
-			*output++ = sound.buffer.front();
-			sound.buffer.erase(sound.buffer.begin());
-			if (SoundDeviceSetting::channels == 2) {
-				*output++ = sound.buffer.front();
-				sound.buffer.erase(sound.buffer.begin());
-			}
+		for (size_t count = 0; count < framesPerBuffer * SoundDeviceSetting::channels; count++) {
+			output[count] = (count >= sound.buffer.size() ? SoundDeviceSetting::SAMPLE_SILENCE : sound.buffer[count]);
 		}
-		// Remove first element
 		thisRef->_sounds.erase(thisRef->_sounds.begin());
 		thisRef->_lock.unlock();
 	}
@@ -79,6 +67,9 @@ bool Babel::PaOutput::start()
 bool Babel::PaOutput::stop()
 {
 	_error = Pa_StopStream(_stream);
+	_lock.lock();
+	_sounds.clear();
+	_lock.unlock();
 	return _error == paNoError;
 }
 
@@ -91,5 +82,7 @@ Babel::DecodedSound Babel::PaOutput::getSound() const
 
 void Babel::PaOutput::setSound(const DecodedSound &sound)
 {
+	_lock.lock();
 	_sounds.emplace_back(sound);
+	_lock.unlock();
 }
