@@ -26,7 +26,7 @@ void Server::startServer()
 		boost::bind(&Server::handle, this,
 			boost::asio::placeholders::error)
 	);
-	//le nombre recu doit être double tout le temps
+
 	boost::asio::read(socket_, boost::asio::buffer(buffers, 2));
 
 	nb = atoi(buffers);
