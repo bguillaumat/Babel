@@ -54,6 +54,7 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<std
 	std::string			ip, username;
 	std::vector<std::string>	tokens;
 	std::list<Client>::iterator	it1;
+	std::list<std::string>::iterator	it2;
 
 	if (nb >= 10)
 		nb += 1;
@@ -90,22 +91,9 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<std
 				it1 = client_list.erase(it1);
 			}
 		}
-		/*for (it2 = socket_list.begin(); it2 != socket_list.end(); it2++) {
-			if ((*it2).remote_endpoint().address().to_string() == socket_.remote_endpoint().address().to_string()) {
-				std::cout << username << " leaved the server" <<std::endl;
-				it2 = socket_list.erase(it2);
-			}
-		}*/
-		//check du vidage de list
 		std::cout << client_list.size() << std::endl;
 	}
 	else if (option == 2) {
-		//std::string msg="ip du contact dans le set";
-		/*std::string msg ="You are trying to call " + username + "\n";
-		boost::asio::async_write(socket_, boost::asio::buffer(msg),
-			boost::bind(&Server::handle, this,
-				boost::asio::placeholders::error)
-		);*/
 		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
 			if ((*it1).getUsername() == username) {
 				//print
@@ -115,6 +103,8 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<std
 					boost::bind(&Server::handle, this,
 						boost::asio::placeholders::error)
 				);
+				msg = (*it1).getIp() + "|" + "500|" + ip;
+				msg_list.push_back(msg);
 			}
 		}
 		if (!find) {
@@ -140,6 +130,28 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<std
 	}
 
 	else if (option == 5) {
+		boost::algorithm::split(tokens, data, boost::is_any_of("|"));
+		for (it2 = msg_list.begin(); it2 != msg_list.end(); it2++) {
+			boost::algorithm::split(tokens, (*it2), boost::is_any_of("|"));
+			std::string delivery = tokens[1] + "|" + tokens[2] + "\n";
+			if (tokens[0] == ip) {
+				find = true;
+				boost::asio::async_write(socket_,
+					boost::asio::buffer(delivery),
+					boost::bind(&Server::handle, this,
+						boost::asio::placeholders::error));
+				it2 = msg_list.erase(it2);
+				break;
+			}
+		}
+		if (!find)
+		{
+			std::string msg = "0\n";
+			boost::asio::async_write(socket_, boost::asio::buffer(msg),
+				boost::bind(&Server::handle, this,
+					boost::asio::placeholders::error)
+			);
+		}
 		//if msg parse ip|msg ip == current ip dire ce qu'il y'a
 	}
 
