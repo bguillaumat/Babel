@@ -17,7 +17,7 @@ void Server::handler(const boost::system::error_code &error, std::size_t bytes_t
 	if (!error && !bytes_transferred){}
 }
 
-void Server::startServer(std::list<Client>& client_list)
+void Server::startServer(std::list<Client>& client_list, std::list<std::string>& msg_list)
 {
 	char	buffers[sizeof(char) * 2];
 	int	nb = 0;
@@ -40,11 +40,11 @@ void Server::startServer(std::list<Client>& client_list)
 			boost::bind(&Server::handle, this,
 				boost::asio::placeholders::error));
 
-		getClientData(nb, client_list);
+		getClientData(nb, client_list, msg_list);
 	}
 }
 
-void	Server::getClientData(int nb, std::list<Client>& client_list)
+void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<std::string>& msg_list)
 {
 	char	buffers[sizeof(char) * nb];
 	std::string			data;
@@ -95,11 +95,11 @@ void	Server::getClientData(int nb, std::list<Client>& client_list)
 	}
 	else if (option == 2) {
 		//std::string msg="ip du contact dans le set";
-		std::string msg ="You are trying to call " + username + "\n";
+		/*std::string msg ="You are trying to call " + username + "\n";
 		boost::asio::async_write(socket_, boost::asio::buffer(msg),
 			boost::bind(&Server::handle, this,
 				boost::asio::placeholders::error)
-		);
+		);*/
 		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
 			if ((*it1).getUsername() == username) {
 				//print
@@ -120,11 +120,7 @@ void	Server::getClientData(int nb, std::list<Client>& client_list)
 		}
 	}
 	else if (option == 3) {
-		std::string msg ="Refreshing online contacts\n";
-		boost::asio::async_write(socket_, boost::asio::buffer(msg),
-			boost::bind(&Server::handle, this,
-				boost::asio::placeholders::error)
-		);
+		std::string msg ="";
 		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
 			if (it1 != client_list.begin())
 				msg += "|";
@@ -177,7 +173,7 @@ void Tcp::check_accept(Server::pointer new_connection, const boost::system::erro
 	if (!error)
 	{
 		std::cout<<"A new client is connected!"<<std::endl;
-		new_connection->startServer(_participants);
+		new_connection->startServer(_participants, _msg);
 		begin_accept();
 	}
 }
