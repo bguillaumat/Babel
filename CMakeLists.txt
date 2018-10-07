@@ -23,12 +23,9 @@ endif ()
 include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 conan_basic_setup()
 
-set(Boost_USE_STATIC_LIBS OFF)
-set(Boost_USE_MULTITHREADED ON)
-set(Boost_USE_STATIC_RUNTIME OFF)
-
 find_package(Threads REQUIRED)
 find_package(Qt5 COMPONENTS Gui Core Widgets Network REQUIRED)
+find_package(Boost)
 
 SET(COMMON_SRCS
         sources/common/Factory.cpp
