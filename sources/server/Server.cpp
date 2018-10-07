@@ -127,8 +127,13 @@ void	Server::getClientData(int nb, std::list<Client>& client_list, std::list<tcp
 		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
 			if (it1 != client_list.begin())
 				msg += "|";
-			msg += (*it1).getIp() + ":"  + (*it1).getUsername();
+			msg += (*it1).getIp() + ":" + (*it1).getUsername();
 		}
+		msg += "\n";
+		boost::asio::async_write(socket_, boost::asio::buffer(msg),
+			boost::bind(&Server::handle, this,
+				boost::asio::placeholders::error)
+		);
 	}
 
 	std::cout << "Infos récupéré chez le client => [" << data << "]" <<std::endl;
