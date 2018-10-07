@@ -52,7 +52,6 @@ class Tcp : public Client{
 private:
 	tcp::socket		*tab_socket;
 	std::list<Client>	_participants;
-	std::list<tcp::socket>	_psockets;
 	tcp::acceptor		accept_;
 	void			begin_accept();
 	void			check_accept(Server::pointer new_connection,

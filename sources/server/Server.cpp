@@ -54,7 +54,6 @@ void	Server::getClientData(int nb, std::list<Client>& client_list)
 	std::string			ip, username;
 	std::vector<std::string>	tokens;
 	std::list<Client>::iterator	it1;
-	std::list<tcp::socket>::iterator	it2;
 
 	if (nb >= 10)
 		nb += 1;
@@ -83,8 +82,11 @@ void	Server::getClientData(int nb, std::list<Client>& client_list)
 		is_connected = false;
 		Client	current_client(ip, username, is_connected);
 		for (it1 = client_list.begin(); it1 != client_list.end(); it1++) {
-			if ((*it1).getIp() == current_client.getIp() && (*it1).getUsername() == current_client.getUsername()) {
-				std::cout << username << " leaved the server" <<std::endl;
+			if ((*it1).getIp() == current_client.getIp() &&
+				(*it1).getUsername() ==
+					current_client.getUsername()) {
+				std::cout << username << " leaved the server"
+					<< std::endl;
 				it1 = client_list.erase(it1);
 			}
 		}
