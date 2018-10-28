@@ -16,7 +16,7 @@ For build use the following command:
 ```sh
 $ mkdir build && cd build && conan install --build missing .. && cmake .. -G "Unix
 Makefiles" && cmake –build .
-$ export QT_QPA_PLATFORM_PLUGIN_PATH=~/.conan/data/Qt/5.11.2/bincrafters/stable/package/PACKAGE_NAME/plugins
+$ export QT_QPA_PLATFORM_PLUGIN_PATH=~/.conan/data/Qt/5.11.2/bincrafters/stable/package/<random_package_id>/plugins
 $ export QT_QPA_FONTDIR=~.fonts
 ```
 
