@@ -20,7 +20,7 @@ RUN apt-get update && apt-get -y install \
   libx11-6 \
   libasound2-dev
 
-RUN apt-get -y install python3-pip python3-dev && pip3 install --updrade pip
+RUN apt-get -y install python3-pip python3-dev && pip3 install --upgrade pip
 
 RUN pip3 install pyopenssl ndg-httpsclient pyasn1
 RUN pip3 install urllib3[secure] --upgrade
