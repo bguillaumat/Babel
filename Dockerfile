@@ -20,6 +20,11 @@ RUN apt-get update && apt-get -y install \
   libx11-6 \
   libasound2-dev
 
+RUN apt-get -y install python3-pip python3-dev && pip3 install --updrade pip
+
+RUN pip3 install pyopenssl ndg-httpsclient pyasn1
+RUN pip3 install urllib3[secure] --upgrade
+
 CMD /bin/bash
 
 # Install latest CMake
@@ -29,7 +34,7 @@ RUN wget -q -O /tmp/cmake.tar.gz --no-check-certificate \
   rm /tmp/cmake.tar.gz
 
 # Install conan
-RUN curl -C - -L -O https://dl.bintray.com/conan/installers/conan-ubuntu-64_1_7_3.deb && dpkg -i conan-ubuntu-64_1_7_3.deb && conan remote add bincrafters "https://api.bintray.com/conan/bincrafters/public-conan" && rm conan-ubuntu-64_1_7_3.deb
+RUN pip3 install conan && conan remote add bincrafters "https://api.bintray.com/conan/bincrafters/public-conan"
 
 
 
