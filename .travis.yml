@@ -6,4 +6,4 @@ before_install:
   - docker build -t friendlyhello .
   - docker run -itd --name build friendlyhello
 script:
-  - docker exec build bash -c "mkdir build && cd build && conan install .. --build missing && cmake .. -G \"Unix Makefiles\" && cmake --build ."
+  - docker exec build bash -c "mkdir build && cd build && conan install --build missing .. && cmake .. -G \"Unix Makefiles\" && cmake --build ."
