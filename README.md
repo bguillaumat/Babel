@@ -42,6 +42,7 @@ The audio is transmitted via UDP
 # Libraries
 * **Qt**
 * **Boost**
+* **PortAudio**
 
 # Authors
 **Brice Lang-Nguyen** brice.lang-nguyen@epitech.eu  
