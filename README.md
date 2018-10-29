@@ -14,11 +14,20 @@ The build need the utilisation of [conan](https://conan.io/).
 For build use the following command: 
 ### Linux:
 ```sh
-$ mkdir build && cd build && conan install --build missing .. && cmake .. -G "Unix
-Makefiles" && cmake –build .
+$ mkdir build && cd build && conan install --build missing .. && cmake .. && cmake –build .
 $ export QT_QPA_PLATFORM_PLUGIN_PATH=~/.conan/data/Qt/5.11.2/bincrafters/stable/package/<random_package_id>/plugins
 $ export QT_QPA_FONTDIR=~.fonts
 ```
+### Windows:
+```sh
+$ mkdir build
+$ cd build
+$ pip install conan
+$ conan install --build missing
+$ cmake .. -G "Visual Studio 15 2017 Win64" -DCMAKE_BUILD_TYPE=Release
+$ cmake --build . --config Release
+```
+
 
 # Upgrades
 * **Implementation of Opus for a sound compression**
