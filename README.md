@@ -45,6 +45,6 @@ The audio is transmitted via UDP
 * **PortAudio**
 
 # Authors
-**Brice Lang-Nguyen** brice.lang-nguyen@epitech.eu  
-**Johanne-Franck Ngbokoli** franck.ngbokoli@epitech.eu  
-**Bastien Guillaumat** bastien.guillaumat@epitech.eu  
+**Brice Lang-Nguyen** (brice.lang-nguyen@epitech.eu)  
+**Johanne-Franck Ngbokoli** (franck.ngbokoli@epitech.eu)  
+**Bastien Guillaumat** (bastien.guillaumat@epitech.eu)  
